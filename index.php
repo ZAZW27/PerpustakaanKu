@@ -1,0 +1,1 @@
+<?php header('location:src/view/main/index.php') ?>
