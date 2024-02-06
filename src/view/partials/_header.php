@@ -51,6 +51,7 @@ $id_user = $_SESSION['id_user'];
             </div>
             <div class="navbar-end flex gap-2">
                 <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../admin/index.php" class="btn btn-ghost btn-circle">Admin</a>
+                <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../pengguna/index.php" class="btn btn-ghost btn-circle">Pengguna</a>
                 <a class="<?= $level == 'petugas' ? '' : 'hidden' ?>" href="../sortir/index.php" class="btn btn-ghost btn-circle">Sortir</a>
                 <a class="" href="../user/index.php" class="btn btn-ghost btn-circle">User</a>
                 <a href="../auth/crud/aksi-logout.php" class="btn btn-ghost btn-circle">

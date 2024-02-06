@@ -8,14 +8,23 @@
 </head>
 <body>
     <div class="login-container">
-        <form method="post" action="#" class="login-form">
+        <form method="post" action="crud/aksi-regis.php" class="login-form">
             <h1>Welcome Back</h1>
             <p>Please login to your account</p>
             <div class="input-group">
             <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
             <div class="input-group">
+            <input type="text" id="email" name="email" placeholder="email" required>
+            </div>
+            <div class="input-group">
+            <input type="text" id="nama_lengkap" name="nama_lengkap" placeholder="nama lengkap" required>
+            </div>
+            <div class="input-group">
             <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="input-group">
+            <textarea name="alamat" id="" cols="30" rows="10"></textarea>
             </div>
             <button type="submit">Login</button>
             <div class="bottom-text">
