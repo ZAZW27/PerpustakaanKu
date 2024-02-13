@@ -9,6 +9,7 @@
         $isCatgorySet = false;
     }
     ?>
+    
     <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col justify-center items-center">
         <div class="mx-auto flex flex-col justify-center items-center">
             <h1 class="text-3xl text-center font-bold">SELAMAT DATANG</h1>
@@ -30,6 +31,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="w-full relative z-[10] flex flex-col flex-wrap gap-2 md:gap-4 justify-start items-start card rounded-box p-2">
                 <?php 
                 if($isCatgorySet){
