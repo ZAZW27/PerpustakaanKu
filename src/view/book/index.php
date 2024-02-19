@@ -31,6 +31,9 @@
                 <a href="crud/save.php?buku=<?=$idBuku?>" id="save" class="btn btn-info btn-sm mt-3 ">Simpan buku +</a>
             <?php } ?>
         </div>
+        <div>
+            woi ada kha ini 
+        </div>
         <!-- <div class="w-full md:w-7/12 rounded-md shadow-xl h-[30rem] md:h bg-base-200 bg-no-repeat bg-center bg-contain" style="background-image: url('../../../public/images/buku/<?=$f['image'] > 0 ? $f['image'] : 'notfound.jpeg' ?>')"></div> -->
     </main>
 <?php include '../partials/_footer.php' ?>

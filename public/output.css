@@ -3243,10 +3243,6 @@ html {
   height: 100%;
 }
 
-.h-\[10rem\] {
-  height: 10rem;
-}
-
 .max-h-\[30rem\] {
   max-height: 30rem;
 }
@@ -3479,11 +3475,6 @@ html {
   padding-bottom: 1rem;
 }
 
-.py-1 {
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
-
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -3659,22 +3650,6 @@ html {
 
   .md\:w-\[40rem\] {
     width: 40rem;
-  }
-
-  .md\:w-\[50rem\] {
-    width: 50rem;
-  }
-
-  .md\:w-\[60rem\] {
-    width: 60rem;
-  }
-
-  .md\:w-\[0rem\] {
-    width: 0rem;
-  }
-
-  .md\:w-\[\] {
-    width: ;
   }
 
   .md\:w-\[80vw\] {
