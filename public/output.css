@@ -2288,6 +2288,36 @@ html {
   justify-content: flex-end;
 }
 
+.radio {
+  flex-shrink: 0;
+  --chkbg: var(--bc);
+  height: 1.5rem;
+  width: 1.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 9999px;
+  border-width: 1px;
+  border-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-border-opacity)));
+  --tw-border-opacity: 0.2;
+}
+
+.rating {
+  position: relative;
+  display: inline-flex;
+}
+
+.rating :where(input) {
+  cursor: pointer;
+  border-radius: 0px;
+  animation: rating-pop var(--animation-input, 0.25s) ease-out;
+  height: 1.5rem;
+  width: 1.5rem;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
+  --tw-bg-opacity: 1;
+}
+
 .select {
   display: inline-flex;
   cursor: pointer;
@@ -2830,6 +2860,32 @@ html {
   }
 }
 
+.radio:focus {
+  box-shadow: none;
+}
+
+.radio:focus-visible {
+  outline-style: solid;
+  outline-width: 2px;
+  outline-offset: 2px;
+  outline-color: var(--fallback-bc,oklch(var(--bc)/1));
+}
+
+.radio:checked,
+  .radio[aria-checked="true"] {
+  --tw-bg-opacity: 1;
+  background-color: var(--fallback-bc,oklch(var(--bc)/var(--tw-bg-opacity)));
+  background-image: none;
+  animation: radiomark var(--animation-input, 0.2s) ease-out;
+  box-shadow: 0 0 0 4px var(--fallback-b1,oklch(var(--b1)/1)) inset,
+      0 0 0 4px var(--fallback-b1,oklch(var(--b1)/1)) inset;
+}
+
+.radio:disabled {
+  cursor: not-allowed;
+  opacity: 0.2;
+}
+
 @keyframes radiomark {
   0% {
     box-shadow: 0 0 0 12px var(--fallback-b1,oklch(var(--b1)/1)) inset,
@@ -2845,6 +2901,39 @@ html {
     box-shadow: 0 0 0 4px var(--fallback-b1,oklch(var(--b1)/1)) inset,
       0 0 0 4px var(--fallback-b1,oklch(var(--b1)/1)) inset;
   }
+}
+
+.rating input {
+  -moz-appearance: none;
+       appearance: none;
+  -webkit-appearance: none;
+}
+
+.rating .rating-hidden {
+  width: 0.5rem;
+  background-color: transparent;
+}
+
+.rating input[type="radio"]:checked {
+  background-image: none;
+}
+
+.rating input:checked ~ input,
+  .rating input[aria-checked="true"] ~ input {
+  --tw-bg-opacity: 0.2;
+}
+
+.rating input:focus-visible {
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transform: translateY(-0.125em);
+}
+
+.rating input:active:focus {
+  animation: none;
+  transform: translateY(-0.125em);
 }
 
 @keyframes rating-pop {
@@ -3243,6 +3332,26 @@ html {
   height: 100%;
 }
 
+.h-40 {
+  height: 10rem;
+}
+
+.h-\[\] {
+  height: ;
+}
+
+.h-\[20rem\] {
+  height: 20rem;
+}
+
+.h-\[15rem\] {
+  height: 15rem;
+}
+
+.h-\[12rem\] {
+  height: 12rem;
+}
+
 .max-h-\[30rem\] {
   max-height: 30rem;
 }
@@ -3277,6 +3386,26 @@ html {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[\] {
+  width: ;
+}
+
+.w-\[20rem\] {
+  width: 20rem;
+}
+
+.w-\[30rem\] {
+  width: 30rem;
+}
+
+.w-\[0rem\] {
+  width: 0rem;
+}
+
+.w-12 {
+  width: 3rem;
 }
 
 .flex-grow {
@@ -3343,8 +3472,24 @@ html {
   align-self: flex-start;
 }
 
+.self-center {
+  align-self: center;
+}
+
 .overflow-hidden {
   overflow: hidden;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.overflow-x-clip {
+  overflow-x: clip;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .rounded-box {
@@ -3399,6 +3544,16 @@ html {
 
 .bg-transparent {
   background-color: transparent;
+}
+
+.bg-black {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 0 0 / var(--tw-bg-opacity));
+}
+
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 
 .from-slate-900\/80 {
@@ -3473,6 +3628,21 @@ html {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.py-1\.5 {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
 }
 
 .pb-4 {
@@ -3553,6 +3723,11 @@ html {
 
 .text-transparent {
   color: transparent;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .shadow {
@@ -3656,8 +3831,16 @@ html {
     width: 80vw;
   }
 
+  .md\:w-\[30rem\] {
+    width: 30rem;
+  }
+
   .md\:flex-row {
     flex-direction: row;
+  }
+
+  .md\:items-start {
+    align-items: flex-start;
   }
 
   .md\:justify-start {
