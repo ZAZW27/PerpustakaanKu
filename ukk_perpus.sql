@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2024 at 05:14 AM
+-- Generation Time: Feb 20, 2024 at 12:09 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -138,7 +138,8 @@ INSERT INTO `tbl_koleksi_pribadi` (`id_koleksi`, `id_user`, `id_buku`) VALUES
 (15, 3, 2),
 (16, 2, 13),
 (17, 2, 2),
-(18, 2, 3);
+(18, 2, 3),
+(20, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -163,11 +164,12 @@ CREATE TABLE `tbl_peminjaman` (
 INSERT INTO `tbl_peminjaman` (`id_peminjaman`, `id_user`, `id_buku`, `tgl_peminjaman`, `tgl_tegat`, `tgl_pengembalian`, `status_peminjaman`) VALUES
 (1, 3, 3, '2024-02-01', '2024-03-01', '2024-02-05', 'retrieved'),
 (2, 3, 11, '2024-01-01', '2024-02-01', '2024-02-02', 'late retrieved'),
-(3, 3, 4, '2024-01-01', '2024-02-01', NULL, 'late'),
+(3, 3, 4, '2024-01-01', '2024-02-01', '2024-02-13', 'retrieved'),
 (4, 3, 12, '2024-01-01', '2024-02-01', '2024-02-01', 'retrieved'),
 (5, 2, 4, '2023-12-13', '2024-01-13', '2024-01-13', 'retrieved'),
 (6, 1, 6, '2024-02-04', '2024-02-16', '2024-02-05', 'retrieved'),
-(7, 1, 3, '2024-02-05', '2024-02-17', NULL, 'on going');
+(7, 1, 3, '2024-02-05', '2024-02-17', NULL, 'on going'),
+(8, 1, 4, '2024-02-13', '2024-02-25', NULL, 'on going');
 
 -- --------------------------------------------------------
 
@@ -191,9 +193,32 @@ CREATE TABLE `tbl_user` (
 
 INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `email`, `nama_lengkap`, `alamat`, `level`) VALUES
 (1, 'zharif', 'c4ca4238a0b923820dcc509a6f75849b', 'zharifazizzulkarnain@gmail.com', 'Zharif Aziz Zulkarnain Widodo', 'Perum. Graha Indah Block W No. 22', 'administrator'),
-(2, 'yusoup', 'c4ca4238a0b923820dcc509a6f75849b', 'youshouldrun@gmail.com', 'Muhammad Yusuf Pratama', 'Karangjati', 'petugas'),
-(3, 'radeet', 'c4ca4238a0b923820dcc509a6f75849b', 'mradytikhsan@gmail.com', 'Muhammad Radyt Ikhsan Pratama', 'perumahan wiwiw', 'peminjam'),
-(5, 'asdasdas', '', '', '', '', 'peminjam');
+(2, 'yusoup', 'c4ca4238a0b923820dcc509a6f75849b', 'youshouldrun@gmail.com', 'Muhammad Yusuf Pratama', 'kariangau', 'petugas'),
+(3, 'radeet', 'c4ca4238a0b923820dcc509a6f75849b', 'mradytikhsan@gmail.com', 'Muhammad Radyt Ikhsan Pratama', 'perumahan wiwiw', 'petugas'),
+(5, 'asdasdas', '', '', '', '', 'peminjam'),
+(6, 'maul', 'c4ca4238a0b923820dcc509a6f75849b', 'arya@gmail.com', 'maulana', 'semabrang', 'peminjam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ulasanbuku`
+--
+
+CREATE TABLE `ulasanbuku` (
+  `id_ulasan` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_buku` int(11) NOT NULL,
+  `ulasan` text NOT NULL,
+  `rating` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `ulasanbuku`
+--
+
+INSERT INTO `ulasanbuku` (`id_ulasan`, `id_user`, `id_buku`, `ulasan`, `rating`) VALUES
+(1, 1, 1, 'Buku ini bagus menceritakan tentang pertualangan anak anak muda yang sungguh cerah sekali', 5),
+(2, 1, 1, 'lumayan sih menceritakan tentang sebuah pertualangan yang keren\r\n', 3);
 
 --
 -- Indexes for dumped tables
@@ -242,6 +267,12 @@ ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
+-- Indexes for table `ulasanbuku`
+--
+ALTER TABLE `ulasanbuku`
+  ADD PRIMARY KEY (`id_ulasan`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -267,19 +298,25 @@ ALTER TABLE `tbl_kategori_buku`
 -- AUTO_INCREMENT for table `tbl_koleksi_pribadi`
 --
 ALTER TABLE `tbl_koleksi_pribadi`
-  MODIFY `id_koleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_koleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_peminjaman`
 --
 ALTER TABLE `tbl_peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `ulasanbuku`
+--
+ALTER TABLE `ulasanbuku`
+  MODIFY `id_ulasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

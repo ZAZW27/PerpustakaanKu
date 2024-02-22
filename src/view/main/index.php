@@ -9,30 +9,39 @@
         $isCatgorySet = false;
     }
     ?>
-    
+    <input type="text" id="isCatergorySet" value="<?=$isCatgorySet == false ? 'false' : 'true' ?>" hidden>
     <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col justify-center items-center">
         <div class="mx-auto flex flex-col justify-center items-center">
             <h1 class="text-3xl text-center font-bold">SELAMAT DATANG</h1>
             <h1 class="text-3xl text-center font-medium"><?= $nama_lengkap ?></h1>
             <p class="leading-3 text-neutral-content"><?= $level ?></p>
         </div>
-        <div class="flex justify-between items-start w-full px-0 md:px-6">
-            <div id="category-modal" class="grid w-full md:w-[40rem] h-20 px-4 fixed -top-[100vh] z-[11] md:sticky md:top-20 md:mt-20 flex-grow transition-all duration-300 ease-in-out">
-                <div class="card place-items-center bg-base-200 shadow-md rounded-box w-full h-full flex flex-col justify-start items-start px-4 pt-2 pb-4">
-                    <div class="divider divider-start divider-neutral-content text-base-neutral font-bold">Katgori</div>
-                    <div class="flex flex-col text-sm -mt-2 pl-4 w-full">
-                    <a class="w-full divider divider-start my-1 px-2 hover:font-bold <?= !isset($_GET['kategori']) ? 'font-bold' : ''?>" href="index.php">all</a>
-                        <?php 
-                        $navCategory = mysqli_query($con, "SELECT tbl_kategori.id_kategori, nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_kategori ON tbl_kategori_buku.id_kategori = tbl_kategori.id_kategori INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku GROUP BY tbl_kategori_buku.id_kategori");
-                        while($nav = mysqli_fetch_array($navCategory)){
-                        ?>
-                            <a class="w-full divider divider-start my-1 px-2 hover:font-bold <?=isset($_GET['kategori']) && $_GET['kategori'] == $nav['id_kategori'] ? 'font-bold' : '' ?>" href="?kategori=<?= $nav['id_kategori'] ?>"><?= $nav['nama_kategori'] ?></a>
-                        <?php } ?>
+        <div class="flex flex-col justify-between items-start w-full px-0 md:px-6">
+            <div class="w-full">
+                <h1 class="text-xl font-semibold">Cari Buku</h1>
+                <div id="category-modal" class="w-full h-12 flex justify-start items-center px-4 my-4">
+                    <div class="flex gap-2 md:gap-0 md:flex-row flex-col border-b-[3px] border-slate-500/50 px-2 py-1">
+                        <div class="md:border-r-2 border-b-2 md:border-b-0 border-slate-500/50 pr-1">
+                            <label for="" class="text-lg font-medium">Kategori</label>
+                            <select name="" id="" class="focus:outline-none focus:border-none focus:ring-0">
+                                <option value="">all</option>
+                                <?php 
+                                $getSortCat = mysqli_query($con, "SELECT tbl_kategori_buku.id_kategori, tbl_kategori.nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_buku.id_buku = tbl_kategori_buku.id_buku INNER JOIN tbl_kategori ON tbl_kategori.id_kategori = tbl_kategori_buku.id_kategori GROUP BY tbl_kategori.id_kategori;");
+                                while($kat = mysqli_fetch_array($getSortCat)){
+                                ?>
+                                <option value="<?= $kat['id_kategori']?>"><?= $kat['nama_kategori'] ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="pl-1">
+                            <!-- <textarea id="search-bar" name="search-bar" id="" cols="30" rows="10"></textarea> -->
+                            <input placeholder="Cari nama buku" id="search-bar" type="text" name="search-buku" class="focus:ring-0 focus:border-none focus:outline-none">
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="w-full relative z-[10] flex flex-col flex-wrap gap-2 md:gap-4 justify-start items-start card rounded-box p-2">
+            <div id="book-section" class="w-full relative z-[10] flex flex-col flex-wrap gap-2 md:gap-4 justify-start items-start card rounded-box p-2">
                 <?php 
                 if($isCatgorySet){
                     $idKategori = $_GET['kategori'];
@@ -66,5 +75,27 @@
             </div>
         </div>
     </main>
+    <script>
+        
+        $('#search-bar').on('input', function () {
+            var searchValue = $(this).val();
+            var CatSet = $('#isCatergorySet').val();
+            console.log(CatSet)
+            // $('#book-section').html(searchValue)
+            $.ajax({
+                type: 'POST',
+                dataType: "html",
+                url: "crud/search-book.php",
+                data: {value: searchValue, catset: CatSet}, 
+                success: function (msg){
+                    $('#book-section').html(msg)
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle errors during the AJAX request
+                    console.error('AJAX Error:', textStatus, errorThrown);
+                }
+            })
+        })
+    </script>
     <script src="main.js"></script>
 <?php include '../partials/_footer.php' ?>
