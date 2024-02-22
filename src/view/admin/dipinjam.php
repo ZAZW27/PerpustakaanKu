@@ -1,10 +1,30 @@
 <?php include '../partials/_header.php' ?>
     <main class="relative top-16 z-[10] px-4 md:px-4 py-10 flex flex-col justify-center items-start gap-4">
-        <div class="border-b border-base-300 pb-4 flex justify-start px-12 w-full">
-            <a href="index.php" class="px-4 mx-2 border-b-2 hover:bg-base-200 rounded-t-md border-neutral">Available</a>
-            <a href="#" class="px-4 mx-2 border-b-2 bg-base-200 rounded-t-md border-neutral">Dipinjam</a>
+    <div class="border-b border-base-300 pb-4 flex flex-col md:flex-row-reverse justify-around px-2 w-full">
+            <div class="flex px-10">
+                <a href="index.php" class="px-4 mx-2 border-b-[2.4px] hover:bg-gradient-to-t from-sky-300/20 to-sky-500/0 rounded-t-md border-blue-900 font-medium transition-all duration-150 ease-in-out">Available</a>
+                <a href="#" class="px-4 mx-2 border-b-[2.4px] rounded-t-md border-blue-900 bg-gradient-to-t from-sky-500/20 to-sky-500/0 font-medium">Dipinjam</a>
+            </div>
+            <div class="flex gap-2 md:gap-0 md:flex-row flex-col border-b-[3px] border-slate-500/50 px-2 py-1">
+                <div class="md:border-r-2 border-b-2 md:border-b-0 border-slate-500/50 pr-1">
+                    <label for="" class="text-lg font-normal">Kategori</label>
+                    <select name="category-option" id="category-option" class="focus:outline-none focus:border-none focus:ring-0 bg-transparent">
+                        <option value="">all</option>
+                        <?php 
+                        $getSortCat = mysqli_query($con, "SELECT tbl_kategori_buku.id_kategori, tbl_kategori.nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_buku.id_buku = tbl_kategori_buku.id_buku INNER JOIN tbl_kategori ON tbl_kategori.id_kategori = tbl_kategori_buku.id_kategori GROUP BY tbl_kategori.id_kategori;");
+                        while($kat = mysqli_fetch_array($getSortCat)){
+                        ?>
+                        <option <?= isset($_GET['kategori']) ? $kat['id_kategori'] == $_GET['kategori'] ? 'selected' : '' : '' ?> value="<?= $kat['id_kategori'] ?>"><?= $kat['nama_kategori'] ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
+                <div class="pl-1 w-full md:w-[20vw] ">
+                    <!-- <textarea id="search-bar" name="search-bar" id="" cols="30" rows="10"></textarea> -->
+                    <input placeholder="Cari nama buku" id="search-bar" type="text" name="search-buku" class="focus:ring-0 focus:border-none focus:outline-none bg-transparent w-full">
+                </div>
+            </div>
         </div>
-        <div class="w-full relative z-[10] flex flex-row flex-wrap gap-1 md:gap-4 justify-center items-center card rounded-box p-2">
+        <div id="book-section" class="w-full relative z-[10] flex flex-row flex-wrap gap-1 md:gap-4 justify-center items-center card rounded-box p-2">
             <?php 
                 // $getBook = mysqli_query($con, "SELECT tbl_buku.id_buku, image, judul, penulis FROM tbl_buku");
                 $getBook = mysqli_query($con, "SELECT tbl_buku.id_buku, image, judul, penulis, id_peminjaman
@@ -38,6 +58,30 @@
                     // If the user clicks "Cancel" in the confirmation dialog, do nothing
                     // You can add additional handling or leave it empty
                 }
+            }
+        </script>
+        <script>
+        
+            $('#search-bar').on('input', searchBook)
+            $('#category-option').on('change', searchBook)
+
+            function searchBook(){
+                var searchValue = $('#search-bar').val();
+                var catergoryOpt = $('#category-option').val()
+                
+                $.ajax({
+                    type: 'POST',
+                    dataType: "html",
+                    url: "crud/search-pinjam.php",
+                    data: {value: searchValue, kategori: catergoryOpt}, 
+                    success: function (msg){
+                        $('#book-section').html(msg)
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        // Handle errors during the AJAX request
+                        console.error('AJAX Error:', textStatus, errorThrown);
+                    }
+                })
             }
         </script>
     </main>

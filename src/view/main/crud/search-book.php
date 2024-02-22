@@ -3,7 +3,10 @@ include '../../../config.php';
 
 $searchVal = $_POST['value'];
 
-if($_POST['kategori'] == ''){
+if ($_POST['kategori'] == '' && $searchVal == '') {
+    $getCategory = mysqli_query($con, "SELECT tbl_kategori.id_kategori, nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_kategori ON tbl_kategori_buku.id_kategori = tbl_kategori.id_kategori INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE judul LIKE '%$searchVal%' GROUP BY tbl_kategori_buku.id_kategori LIMIT 6;");
+}
+elseif($_POST['kategori'] == ''){
     $getCategory = mysqli_query($con, "SELECT tbl_kategori.id_kategori, nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_kategori ON tbl_kategori_buku.id_kategori = tbl_kategori.id_kategori INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE judul LIKE '%$searchVal%' GROUP BY tbl_kategori_buku.id_kategori;");
 }
 else{
