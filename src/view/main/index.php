@@ -9,7 +9,7 @@
         $isCatgorySet = false;
     }
     ?>
-    <input type="text" id="isCatergorySet" value="<?=$isCatgorySet == false ? 'false' : 'true' ?>" hidden>
+    
     <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col justify-center items-center">
         <div class="mx-auto flex flex-col justify-center items-center">
             <h1 class="text-3xl text-center font-bold">SELAMAT DATANG</h1>
@@ -23,7 +23,7 @@
                     <div class="flex gap-2 md:gap-0 md:flex-row flex-col border-b-[3px] border-slate-500/50 px-2 py-1">
                         <div class="md:border-r-2 border-b-2 md:border-b-0 border-slate-500/50 pr-1">
                             <label for="" class="text-lg font-medium">Kategori</label>
-                            <select name="" id="" class="focus:outline-none focus:border-none focus:ring-0">
+                            <select name="category-option" id="category-option" class="focus:outline-none focus:border-none focus:ring-0">
                                 <option value="">all</option>
                                 <?php 
                                 $getSortCat = mysqli_query($con, "SELECT tbl_kategori_buku.id_kategori, tbl_kategori.nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_buku.id_buku = tbl_kategori_buku.id_buku INNER JOIN tbl_kategori ON tbl_kategori.id_kategori = tbl_kategori_buku.id_kategori GROUP BY tbl_kategori.id_kategori;");
@@ -79,14 +79,13 @@
         
         $('#search-bar').on('input', function () {
             var searchValue = $(this).val();
-            var CatSet = $('#isCatergorySet').val();
-            console.log(CatSet)
-            // $('#book-section').html(searchValue)
+            var catergoryOpt = $('#category-option').val()
+            
             $.ajax({
                 type: 'POST',
                 dataType: "html",
                 url: "crud/search-book.php",
-                data: {value: searchValue, catset: CatSet}, 
+                data: {value: searchValue, kategori: catergoryOpt}, 
                 success: function (msg){
                     $('#book-section').html(msg)
                 },
