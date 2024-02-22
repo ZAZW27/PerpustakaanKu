@@ -1,20 +1,25 @@
 <?php 
+include '../../../config.php';
 
 $searchVal = $_POST['value'];
 
-if($$_POST['kategori'] == ''){
-    $getCategory = mysqli_query($con, "SELECT tbl_kategori.id_kategori, nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_kategori ON tbl_kategori_buku.id_kategori = tbl_kategori.id_kategori INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku GROUP BY tbl_kategori_buku.id_kategori;");
-}else{
+if($_POST['kategori'] == ''){
+    $getCategory = mysqli_query($con, "SELECT tbl_kategori.id_kategori, nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_kategori ON tbl_kategori_buku.id_kategori = tbl_kategori.id_kategori INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE judul LIKE '%$searchVal%' GROUP BY tbl_kategori_buku.id_kategori;");
+}
+else{
     $idKategori = $_POST['kategori'];
     $getCategory = mysqli_query($con, "SELECT tbl_kategori.id_kategori, nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_kategori ON tbl_kategori_buku.id_kategori = tbl_kategori.id_kategori INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE tbl_kategori.id_kategori = '$idKategori' GROUP BY tbl_kategori_buku.id_kategori;");
 } 
 while($cat = mysqli_fetch_array($getCategory)){
 ?>
-    <!-- <div class="divider w-full"><?= $cat['nama_kategori'] ?></div>
+    <div class="divider w-full"><?= $cat['nama_kategori'] ?></div>
     <div class="w-full relative z-[10] flex flex-row flex-wrap gap-1 md:gap-4 justify-center md:justify-start items-center card rounded-box p-2">
         <?php 
             $id_kategori = $cat['id_kategori'];
-            $getBook = mysqli_query($con, "SELECT tbl_buku.id_buku, image, judul, penulis FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE id_kategori = $id_kategori LIMIT 4");
+            if($searchVal == ''){
+                $getBook = mysqli_query($con, "SELECT tbl_buku.id_buku, image, judul, penulis FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE id_kategori = $id_kategori LIMIT 4");
+            }
+            $getBook = mysqli_query($con, "SELECT tbl_buku.id_buku, image, judul, penulis FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE id_kategori = $id_kategori AND judul LIKE '%$searchVal%'");
             while($book = mysqli_fetch_array($getBook)){
         ?>
             <a href="../book/index.php?buku=<?=$book['id_buku']?>" id="buku" idBuku="<?=$book['id_buku']?>" class="w-[9rem] shadow-lg overflow-hidden md:w-[14rem] h-[17rem] md:h-[20rem] place-items-center card bg-base-300 bg-cover bg-no-repeat bg-center transition-all duration-300 ease-in-out" 
@@ -28,5 +33,5 @@ while($cat = mysqli_fetch_array($getCategory)){
                 </div>
             </a>
         <?php } ?>
-    </div> -->
+    </div>
 <?php } ?>

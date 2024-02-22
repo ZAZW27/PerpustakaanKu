@@ -10,12 +10,10 @@
     }
     ?>
     
-    <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col justify-center items-center">
-        <div class="mx-auto flex flex-col justify-center items-center">
-            <h1 class="text-3xl text-center font-bold">SELAMAT DATANG</h1>
-            <h1 class="text-3xl text-center font-medium"><?= $nama_lengkap ?></h1>
-            <p class="leading-3 text-neutral-content"><?= $level ?></p>
-        </div>
+    <div id="carousel" class="relative top-16 w-full h-[30rem] bg-red-500">
+        
+    </div>
+    <main class="relative z-[10] px-0 md:px-3 py-4 flex flex-col justify-center items-center">
         <div class="flex flex-col justify-between items-start w-full px-0 md:px-6">
             <div class="w-full">
                 <h1 class="text-xl font-semibold">Cari Buku</h1>
@@ -29,7 +27,7 @@
                                 $getSortCat = mysqli_query($con, "SELECT tbl_kategori_buku.id_kategori, tbl_kategori.nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_buku.id_buku = tbl_kategori_buku.id_buku INNER JOIN tbl_kategori ON tbl_kategori.id_kategori = tbl_kategori_buku.id_kategori GROUP BY tbl_kategori.id_kategori;");
                                 while($kat = mysqli_fetch_array($getSortCat)){
                                 ?>
-                                <option value="<?= $kat['id_kategori']?>"><?= $kat['nama_kategori'] ?></option>
+                                <option <?= $kat['id_kategori'] == $_GET['kategori'] ? 'selected' : '' ?> value="<?= $kat['id_kategori'] ?>"><?= $kat['nama_kategori'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -77,8 +75,11 @@
     </main>
     <script>
         
-        $('#search-bar').on('input', function () {
-            var searchValue = $(this).val();
+        $('#search-bar').on('input', searchBook)
+        $('#category-option').on('change', searchBook)
+
+        function searchBook(){
+            var searchValue = $('#search-bar').val();
             var catergoryOpt = $('#category-option').val()
             
             $.ajax({
@@ -94,7 +95,7 @@
                     console.error('AJAX Error:', textStatus, errorThrown);
                 }
             })
-        })
+        }
     </script>
     <script src="main.js"></script>
 <?php include '../partials/_footer.php' ?>
