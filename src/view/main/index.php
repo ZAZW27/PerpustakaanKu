@@ -10,7 +10,7 @@
     }
     ?>
     
-    <div class="relative top-16 w-full md:h-[30rem] h-[90vh] bg-red-500 overflow-clip">
+    <div class="relative top-16 w-full md:h-[30rem] h-[90vh] overflow-clip">
         <div id="banner" class="w-full h-full bg-blue-600/50 absolute" style="top: 0px;">
             <div class="bg-no-repeat bg-cover bg-bottom w-full h-full" style="background-image: url('../../../public/images/background/library.jpg')">
                 <div class="w-full h-full flex flex-col justify-center items-center text-white" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0,  0.5));">
@@ -55,7 +55,7 @@
                             <input placeholder="Cari nama buku" id="search-bar" type="text" name="search-buku" class="focus:ring-0 focus:border-none focus:outline-none bg-transparent w-full">
                         </div>
                     </div>
-                    <div class="ml-auto">
+                    <div class="ml-auto w-full md:w-[40vw]">
                         <marquee class="w-full font-normal" behavior="scroll" direction="left">Ingin <span class="font-medium">meminjam</span> buku? Kunjungilah perpustakaan Balikpapan dan registrasi melalui administrator kami!</marquee> </h1>
                     </div>
                 </div>

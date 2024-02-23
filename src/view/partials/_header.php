@@ -36,6 +36,9 @@ $id_user = $_SESSION['id_user'];
                             <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../admin/index.php" class="btn btn-ghost btn-circle">Peminjaman</a>
                         </li>
                         <li>
+                            <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../buku-log/index.php" class="btn btn-ghost btn-circle">Buku Log</a>
+                        </li>
+                        <li>
                             <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../pengguna/index.php" class="btn btn-ghost btn-circle">Pengguna</a>
                         </li>
                         <li>
@@ -71,6 +74,7 @@ $id_user = $_SESSION['id_user'];
             <div class="navbar-end md:hidden"></div>
             <div class="navbar-end md:flex gap-5 hidden text-lg font-normal">
                 <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../admin/index.php" class="btn btn-ghost btn-circle">Peminjaman</a>
+                <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../buku-log/index.php" class="btn btn-ghost btn-circle">Buku Log</a>
                 <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../pengguna/index.php" class="btn btn-ghost btn-circle">Pengguna</a>
                 <a class="<?= $level == 'petugas' ? '' : 'hidden' ?>" href="../sortir/index.php" class="btn btn-ghost btn-circle">Sortir</a>
                 <a class="" href="../user/index.php" class="btn btn-ghost btn-circle">User</a>
