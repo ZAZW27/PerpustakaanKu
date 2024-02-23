@@ -21,9 +21,34 @@ $id_user = $_SESSION['id_user'];
     <link rel="stylesheet" href="../../../public/output.css">
     <link rel="stylesheet" href="../../../public/overwrite.css">
     <script src="../../jquery.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.min.css">
+    
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+
+    <!-- DataTables Buttons CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/3.0.0/css/buttons.dataTables.min.css">
+
+    <!-- DataTables Buttons JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/3.0.0/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.colVis.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.print.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.html5.min.js"></script>
 </head>
 
 <body class="bg-slate-50">
+    <script>
+        // $(document).ready(function() {
+        //     $('#datatables').DataTable({
+        //         // dom: 'Bfrtip',
+        //         // buttons: ['copy', 'excel', 'pdf', 'print'],
+        //         lengthMenu: [10, 25, 50, 100], // Add this line to specify the page length options
+        //         paging: true // Make sure paging is enabled
+        //     });
+        // });
+
+    </script>
     <header class="fixed w-[100vw] z-[99]">
         <nav class="navbar bg-base-100 w-full shadow-lg px-1 md:px-12">
             <div class="navbar-start">

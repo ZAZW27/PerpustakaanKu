@@ -340,27 +340,26 @@
     }
     }
 </style>
-    <main class="relative top-16 z-[10] px-4 md:px-4 py-10 flex flex-col justify-center items-start gap-4">
+    <main class="relative top-16 z-[10] px-4 md:px-4 py-10 flex flex-col justify-center items-center gap-4">
         <div class="container">
             <div class="row row--top-40">
                 <div class="col-md-12">
-                <h2 class="row__title">Employees (7)</h2>
+                <h2 class="row__title">Not Retrieved (<?= mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(id_peminjaman) as count FROM tbl_peminjaman WHERE tgl_pengembalian IS NULL"))['count'] ?>)</h2>
             </div>
         </div>
-        <div class="row row--top-20">
+        <div class="row row--top-20 md:px-12 lg:px-24">
             <div class="col-md-12">
                 <div class="table-container">
-                    <table class="table">
+                    <table class="table" id="datatables">
                         <thead class="table__thead">
                             <tr>
-                                <th class="table__th"><input id="selectAll" type="checkbox" class="table__select-row"></th>
+                                <th class="table__th">No</th>
                                 <th class="table__th">Name</th>
                                 <th class="table__th">Buku</th>
                                 <th class="table__th">Awal/akhir pinjam </th>
                                 <th class="table__th">dikembalikan</th>
                                 <th class="table__th">Status</th>
-                                <th class="table__th">Progress</th>
-                                <th class="table__th"></th>
+                                <th class="table__th">Action</th>
                             </tr>
                         </thead>
                         <tbody class="table__tbody">
@@ -375,14 +374,15 @@
                                     tbl_peminjaman p
                                 INNER JOIN tbl_user u ON p.id_user = u.id_user 
                                 INNER JOIN tbl_buku b ON p.id_buku = b.id_buku
-                                ORDER BY tgl_pengembalian
+                                ORDER BY tgl_tegat desc
                             ");
                             $rec = 1;
                             while($i = mysqli_fetch_array($getIdentity)){
                             
                             ?>
-                                <tr class="table-row">
+                                <tr class="table-row <?= $i['tgl_tegat'] < date('Y-m-d') && $i['tgl_pengembalian'] == NULL ? 'table-row--red' : '' ?>">
                                     <td class="table-row__td">
+                                        <div class="<?= $i['tgl_tegat'] < date('Y-m-d') && $i['tgl_pengembalian'] == NULL ? 'table-row--overdue' : '' ?>"></div>
                                         <?= $rec ?>
                                     </td>
                                     <td class="table-row__td">
@@ -392,7 +392,7 @@
                                         </div>
                                     </td>
                                     <td data-column="Buku" class="table-row__td">
-                                        <div class="w-[10rem]">
+                                        <div class="">
                                             <p class="table-row__policy"><?= $i['judul'] ?></p>
                                         </div>                
                                     </td>
@@ -405,107 +405,24 @@
                                     <td  data-column="Status" class="table-row__td">
                                         <?php if($i['tgl_tegat'] == date('Y-m-d') && $i['tgl_pengembalian'] == NULL){ ?>
                                             <p class="table-row__status status--yellow status">Due</p>
+                                        <?php }elseif($i['tgl_tegat'] < date('Y-m-d') && $i['tgl_pengembalian'] == NULL){ ?>
+                                            <p class="table-row__status status--red status">Late</p>
                                         <?php }else{ ?>
-                                            <p class="table-row__status status--<?= $i['status_peminjaman'] == 'on going' ? 'blue' : ($i['status_peminjaman'] == 'retrieved' ? 'green' : 'red') ?> status"><?= $i['status_peminjaman'] ?></p>
+                                            <p class="table-row__status status--<?= $i['status_peminjaman'] == 'on going' ? '' : ($i['status_peminjaman'] == 'retrieved' ? 'green status' : 'red status') ?> "><?= $i['status_peminjaman'] ?></p>
                                         <?php } ?>
                                     </td>
-                                    <td data-column="Progress" class="table-row__td">
-                                        <p class="table-row__progress status--blue status">On Track</p>
-                                    </td>
                                     <td class="table-row__td">
-                                        <svg  data-toggle="tooltip" data-placement="bottom" title="Edit" version="1.1" class="table-row__edit" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve"><g>	<g>		<path d="M496.063,62.299l-46.396-46.4c-21.2-21.199-55.69-21.198-76.888,0l-18.16,18.161l123.284,123.294l18.16-18.161    C517.311,117.944,517.314,83.55,496.063,62.299z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>
-                                            <path d="M22.012,376.747L0.251,494.268c-0.899,4.857,0.649,9.846,4.142,13.339c3.497,3.497,8.487,5.042,13.338,4.143    l117.512-21.763L22.012,376.747z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>		<polygon points="333.407,55.274 38.198,350.506 161.482,473.799 456.691,178.568   " style="fill: rgb(1, 185, 209);"></polygon>	</g></g><g></g><g></g><g></g>
-                                            <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                        </svg>
-                                        <svg data-toggle="tooltip" data-placement="bottom" title="Delete" version="1.1" class="table-row__bin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g>	<g>		<path d="M436,60h-90V45c0-24.813-20.187-45-45-45h-90c-24.813,0-45,20.187-45,45v15H76c-24.813,0-45,20.187-45,45v30    c0,8.284,6.716,15,15,15h16.183L88.57,470.945c0.003,0.043,0.007,0.086,0.011,0.129C90.703,494.406,109.97,512,133.396,512    h245.207c23.427,0,42.693-17.594,44.815-40.926c0.004-0.043,0.008-0.086,0.011-0.129L449.817,150H466c8.284,0,15-6.716,15-15v-30    C481,80.187,460.813,60,436,60z M196,45c0-8.271,6.729-15,15-15h90c8.271,0,15,6.729,15,15v15H196V45z M393.537,468.408    c-0.729,7.753-7.142,13.592-14.934,13.592H133.396c-7.792,0-14.204-5.839-14.934-13.592L92.284,150h327.432L393.537,468.408z     M451,120h-15H76H61v-15c0-8.271,6.729-15,15-15h105h150h105c8.271,0,15,6.729,15,15V120z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M256,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C271,186.716,264.284,180,256,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M346,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C361,186.716,354.284,180,346,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M166,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C181,186.716,174.284,180,166,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                            <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                        </svg>              
+                                        <button>
+                                            <svg width="2rem" height="2rem" viewBox="0 0 32.00 32.00" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000" stroke-width="0.00032"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.32"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:#75cede;}.cls-2{fill:#00a6bc;}</style> </defs> <title></title> <g data-name="Layer 6" id="Layer_6"> <path class="cls-1" d="M3.64,6,16,14.77,28.36,6a1,1,0,0,1,1.08,0A4.08,4.08,0,0,0,26.92,5H5.08a4.08,4.08,0,0,0-2.52.9A1,1,0,0,1,3.64,6Z"></path> <path class="cls-2" d="M29.56,6a.86.86,0,0,1,.19.19,1,1,0,0,1-.23,1.39L16.58,16.81a1,1,0,0,1-1.16,0L2.48,7.57a1,1,0,0,1-.23-1.39A.86.86,0,0,1,2.44,6,4.08,4.08,0,0,0,1,9.08V22.92A4.08,4.08,0,0,0,5.08,27H26.92A4.08,4.08,0,0,0,31,22.92V9.08A4.08,4.08,0,0,0,29.56,6ZM13.78,18.81,3.64,26.05a1,1,0,0,1-.58.19,1,1,0,0,1-.81-.42,1,1,0,0,1,.23-1.39l10.14-7.24a1,1,0,0,1,1.16,1.62Zm16,7a1,1,0,0,1-.81.42,1,1,0,0,1-.58-.19L18.22,18.81a1,1,0,1,1,1.16-1.62l10.14,7.24A1,1,0,0,1,29.75,25.82Z"></path> </g> </g></svg>
+                                        </button>  
                                     </td>
                                 </tr>
                             <?php $rec++; } ?>
-
-                            <tr class="table-row table-row--angie">
-                                <td class="table-row__td">
-                                    1
-                                </td>
-                                <td class="table-row__td">
-                                    <div class="table-row__info">
-                                    <p class="table-row__name">Angie E. Swift</p>
-                                    <span class="table-row__small">Vp of Sales</span>
-                                    </div>
-                                </td>
-                                <td data-column="Policy" class="table-row__td">
-                                    <div class="">
-                                    <p class="table-row__policy">$20,000</p>
-                                    <span class="table-row__small">All Inclusive Policy</span>
-                                    </div>                
-                                </td>
-                                <td data-column="Policy Status" class="table-row__td">
-                                    <p class="table-row__p-status status status--yellow">Awating Approval</p>
-                                </td>
-                                <td data-column="Destination" class="table-row__td">
-                                    Huston, US
-                                </td>
-                                <td data-column="Status" class="table-row__td">
-                                    <p class="table-row__status">Waiting</p>
-                                </td>
-                                <td data-column="Progress" class="table-row__td">
-                                    <p class="table-row__progress">Waiting</p>
-                                </td>
-                                <td class="table-row__td">
-                                    <svg  data-toggle="tooltip" data-placement="bottom" title="Edit" version="1.1" class="table-row__edit" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve"><g>	<g>		<path d="M496.063,62.299l-46.396-46.4c-21.2-21.199-55.69-21.198-76.888,0l-18.16,18.161l123.284,123.294l18.16-18.161    C517.311,117.944,517.314,83.55,496.063,62.299z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>
-                                        <path d="M22.012,376.747L0.251,494.268c-0.899,4.857,0.649,9.846,4.142,13.339c3.497,3.497,8.487,5.042,13.338,4.143    l117.512-21.763L22.012,376.747z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>		<polygon points="333.407,55.274 38.198,350.506 161.482,473.799 456.691,178.568   " style="fill: rgb(1, 185, 209);"></polygon>	</g></g><g></g><g></g><g></g>
-                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                    </svg>
-                                    <svg data-toggle="tooltip" data-placement="bottom" title="Delete" version="1.1" class="table-row__bin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g>	<g>		<path d="M436,60h-90V45c0-24.813-20.187-45-45-45h-90c-24.813,0-45,20.187-45,45v15H76c-24.813,0-45,20.187-45,45v30    c0,8.284,6.716,15,15,15h16.183L88.57,470.945c0.003,0.043,0.007,0.086,0.011,0.129C90.703,494.406,109.97,512,133.396,512    h245.207c23.427,0,42.693-17.594,44.815-40.926c0.004-0.043,0.008-0.086,0.011-0.129L449.817,150H466c8.284,0,15-6.716,15-15v-30    C481,80.187,460.813,60,436,60z M196,45c0-8.271,6.729-15,15-15h90c8.271,0,15,6.729,15,15v15H196V45z M393.537,468.408    c-0.729,7.753-7.142,13.592-14.934,13.592H133.396c-7.792,0-14.204-5.839-14.934-13.592L92.284,150h327.432L393.537,468.408z     M451,120h-15H76H61v-15c0-8.271,6.729-15,15-15h105h150h105c8.271,0,15,6.729,15,15V120z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M256,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C271,186.716,264.284,180,256,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M346,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C361,186.716,354.284,180,346,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M166,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C181,186.716,174.284,180,166,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                    </svg>              
-                                </td>
-                            </tr>
-                            
-                            <tr class="table-row table-row--june table-row--red">
-                                <td class="table-row__td">
-                                    <div class="table-row--overdue"></div>
-                                    1
-                                </td>
-                                <td class="table-row__td">
-                                    <div class="table-row__info">
-                                    <p class="table-row__name">June Simmons</p>
-                                    <span class="table-row__small">Social content manager</span>
-                                    </div>
-                                </td>
-                                <td data-column="Policy" class="table-row__td">
-                                    <div class="">
-                                    <p class="table-row__policy">$5,000</p>
-                                    <span class="table-row__small">Basic Policy</span>
-                                    </div>                
-                                </td>
-                                <td data-column="Policy status" class="table-row__td">
-                                    <p class="table-row__p-status status--red status">Rejected</p>
-                                </td>
-                                <td data-column="destination" class="table-row__td">
-                                    Huston, US
-                                </td>
-                                <td data-column="status" class="table-row__td">
-                                    <p class="table-row__status">Rejected</p>
-                                </td>
-                                <td data-column="progress" class="table-row__td">
-                                    <p class="table-row__progress status status--red">Overdue</p>
-                                </td>
-                                <td class="table-row__td">
-                                    <svg  data-toggle="tooltip" data-placement="bottom" title="Edit" version="1.1" class="table-row__edit" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve"><g>	<g>		<path d="M496.063,62.299l-46.396-46.4c-21.2-21.199-55.69-21.198-76.888,0l-18.16,18.161l123.284,123.294l18.16-18.161    C517.311,117.944,517.314,83.55,496.063,62.299z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>
-                                        <path d="M22.012,376.747L0.251,494.268c-0.899,4.857,0.649,9.846,4.142,13.339c3.497,3.497,8.487,5.042,13.338,4.143    l117.512-21.763L22.012,376.747z" style="fill: rgb(1, 185, 209);"></path>	</g></g><g>	<g>		<polygon points="333.407,55.274 38.198,350.506 161.482,473.799 456.691,178.568   " style="fill: rgb(1, 185, 209);"></polygon>	</g></g><g></g><g></g><g></g>
-                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                    </svg>
-                                    <svg data-toggle="tooltip" data-placement="bottom" title="Delete" version="1.1" class="table-row__bin" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve"><g>	<g>		<path d="M436,60h-90V45c0-24.813-20.187-45-45-45h-90c-24.813,0-45,20.187-45,45v15H76c-24.813,0-45,20.187-45,45v30    c0,8.284,6.716,15,15,15h16.183L88.57,470.945c0.003,0.043,0.007,0.086,0.011,0.129C90.703,494.406,109.97,512,133.396,512    h245.207c23.427,0,42.693-17.594,44.815-40.926c0.004-0.043,0.008-0.086,0.011-0.129L449.817,150H466c8.284,0,15-6.716,15-15v-30    C481,80.187,460.813,60,436,60z M196,45c0-8.271,6.729-15,15-15h90c8.271,0,15,6.729,15,15v15H196V45z M393.537,468.408    c-0.729,7.753-7.142,13.592-14.934,13.592H133.396c-7.792,0-14.204-5.839-14.934-13.592L92.284,150h327.432L393.537,468.408z     M451,120h-15H76H61v-15c0-8.271,6.729-15,15-15h105h150h105c8.271,0,15,6.729,15,15V120z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M256,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C271,186.716,264.284,180,256,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M346,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C361,186.716,354.284,180,346,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g>	<g>		<path d="M166,180c-8.284,0-15,6.716-15,15v212c0,8.284,6.716,15,15,15s15-6.716,15-15V195C181,186.716,174.284,180,166,180z" style="fill: rgb(158, 171, 180);"></path>	</g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                                    </svg>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </main>
+    
 <?php include '../partials/_footer.php' ?>
