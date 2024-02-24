@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2024 at 12:09 AM
+-- Generation Time: Feb 24, 2024 at 04:06 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -168,8 +168,12 @@ INSERT INTO `tbl_peminjaman` (`id_peminjaman`, `id_user`, `id_buku`, `tgl_peminj
 (4, 3, 12, '2024-01-01', '2024-02-01', '2024-02-01', 'retrieved'),
 (5, 2, 4, '2023-12-13', '2024-01-13', '2024-01-13', 'retrieved'),
 (6, 1, 6, '2024-02-04', '2024-02-16', '2024-02-05', 'retrieved'),
-(7, 1, 3, '2024-02-05', '2024-02-17', NULL, 'on going'),
-(8, 1, 4, '2024-02-13', '2024-02-25', NULL, 'on going');
+(7, 1, 3, '2024-02-05', '2024-02-22', NULL, 'on going'),
+(8, 2, 4, '2024-02-13', '2024-02-12', '2024-02-23', 'retrieved'),
+(9, 3, 1, '2024-02-22', '2024-03-05', '2024-02-22', 'retrieved'),
+(10, 3, 6, '2024-02-23', '2024-03-06', '2024-02-23', 'retrieved'),
+(11, 6, 7, '2024-02-23', '2024-03-06', NULL, 'on going'),
+(12, 2, 10, '2024-02-23', '2024-02-21', '2024-02-23', 'late retrieved');
 
 -- --------------------------------------------------------
 
@@ -304,7 +308,7 @@ ALTER TABLE `tbl_koleksi_pribadi`
 -- AUTO_INCREMENT for table `tbl_peminjaman`
 --
 ALTER TABLE `tbl_peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`

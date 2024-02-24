@@ -347,6 +347,25 @@
                 <h2 class="row__title">Not Retrieved (<?= mysqli_fetch_array(mysqli_query($con, "SELECT COUNT(id_peminjaman) as count FROM tbl_peminjaman WHERE tgl_pengembalian IS NULL"))['count'] ?>)</h2>
             </div>
         </div>
+        <div class="w-full md:px-12 px-2 flex flex-col gap-4 md:flex-row justify-end items-center">
+            <div class="flex gap-2">
+                <p>Sort by</p>
+                <select name="" id="sort-status">
+                    <option value="">all status</option>
+                    <?php 
+                        $getStatus = mysqli_query($con, "SELECT status_peminjaman FROM `tbl_peminjaman` group by status_peminjaman");
+                        while($s = mysqli_fetch_array($getStatus)['status_peminjaman']){
+                    ?>
+                    <option value="<?=$s?>"><?= $s ?></option>
+                    <?php } ?>
+                    <option value="late">late</option>
+                </select>
+            </div>
+            <div class="flex gap-2">
+                <p>Cari peminjam</p>
+                <input type="text" class="focus:outline-none focus:ring-0 bg-transparent border-b-2 border-slate-400">
+            </div>
+        </div>
         <div class="row row--top-20 md:px-12 lg:px-24">
             <div class="col-md-12">
                 <div class="table-container">
@@ -364,7 +383,7 @@
                         </thead>
                         <tbody class="table__tbody">
                             <?php 
-                            
+                            $currDate = date('Y-m-d');
                             $getIdentity = mysqli_query($con, 
                                 "SELECT
                                     u.username, u.nama_lengkap, u.email, u.alamat, u.level,
@@ -374,6 +393,7 @@
                                     tbl_peminjaman p
                                 INNER JOIN tbl_user u ON p.id_user = u.id_user 
                                 INNER JOIN tbl_buku b ON p.id_buku = b.id_buku
+                                -- WHERE tgl_tegat < '$currDate' AND tgl_pengembalian IS NULL
                                 ORDER BY tgl_tegat desc
                             ");
                             $rec = 1;
@@ -397,10 +417,10 @@
                                         </div>                
                                     </td>
                                     <td data-column="Awal/akhir pinjam" class="table-row__td">
-                                        <p class=""><?= $i['tgl_peminjaman'] . ' - ' . $i['tgl_tegat'] ?></p>
+                                        <p class=""><?= DateTime::createFromFormat('Y-m-d', $i['tgl_peminjaman'])->format('d M Y') . ' - ' . DateTime::createFromFormat('Y-m-d', $i['tgl_tegat'])->format('d M Y') ?></p>
                                     </td>
                                     <td data-column="tanggal pengembalian" class="table-row__td">
-                                        <?= $i['tgl_pengembalian'] != NULL ? $i['tgl_pengembalian'] : 'Belum' ?>
+                                        <?= $i['tgl_pengembalian'] != NULL ? DateTime::createFromFormat('Y-m-d', $i['tgl_pengembalian'])->format('d M Y') : 'Belum' ?>
                                     </td>
                                     <td  data-column="Status" class="table-row__td">
                                         <?php if($i['tgl_tegat'] == date('Y-m-d') && $i['tgl_pengembalian'] == NULL){ ?>

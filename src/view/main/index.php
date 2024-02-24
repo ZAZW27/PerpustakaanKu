@@ -13,7 +13,7 @@
     <div class="relative top-16 w-full md:h-[30rem] h-[90vh] overflow-clip">
         <div id="banner" class="w-full h-full bg-blue-600/50 absolute" style="top: 0px;">
             <div class="bg-no-repeat bg-cover bg-bottom w-full h-full" style="background-image: url('../../../public/images/background/library.jpg')">
-                <div class="w-full h-full flex flex-col justify-center items-center text-white" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0,  0.5));">
+                <div class="w-full h-full flex flex-col justify-center select-none pointer-events-none items-center text-white" style="background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0,  0.5));">
                     <h1 class="text-center text-5xl font-normal">WELCOME TO <span class="text-center  italic">LIBRARY</span></h1>
                     <p class="text-center text-md font-thin leading-9 mt-1"><?= $level ?></p>
                     <h1 class="text-center text-4xl font-thin"><?= $nama_lengkap ?></h1>
@@ -22,6 +22,12 @@
         </div>
         <script>
             $(document).ready(function(){
+                function parallaxScroll(){
+                    var scrollVal = $(this).scrollTop();
+                    var bannerScrolling = (scrollVal * 0.4) + "px"
+                    
+                    $('#banner').css("top",bannerScrolling );
+                }
                 $(window).scroll(function(){
                     var scrollVal = $(this).scrollTop();
                     
@@ -35,7 +41,7 @@
     <main class="relative mt-16 z-[10] px-2 md:px-3 py-4 flex flex-col justify-center items-center">
         <div class="flex flex-col justify-between items-start w-full px-0 md:px-6">
             <div class="w-full">
-                <h1 class="text-3xl font-light">Cari Buku</h1>
+                <h1 class="text-3xl font-light select-none">Cari Buku</h1>
                 <div id="category-modal" class="w-full h-12 flex md:flex-row flex-col justify-start items-center px-4 my-4">
                     <div class="flex gap-2 md:gap-0 md:flex-row flex-col border-b-[3px] border-slate-500/50 px-2 py-1">
                         <div class="md:border-r-2 border-b-2 md:border-b-0 border-slate-500/50 pr-1">
@@ -58,7 +64,7 @@
                     <div class="ml-auto w-full md:w-[40vw]">
                         <marquee class="w-full font-normal" behavior="scroll" direction="left">Ingin <span class="font-medium">meminjam</span> buku? Kunjungilah perpustakaan Balikpapan dan registrasi melalui administrator kami!</marquee> </h1>
                     </div>
-                </div>
+                </div>  
             </div>
             
             <div id="book-section" class="w-full relative z-[10] flex flex-col flex-wrap gap-2 md:gap-4 justify-start items-start card rounded-box p-2">
