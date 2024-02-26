@@ -11,7 +11,7 @@
     ?>
     <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col justify-center items-center">
         <div class="md:w-[80vw] w-full">
-            <table class="table-auto w-full">
+            <table class="table-auto w-full" id="datatables">
                 <thead>
                     <tr>
                         <th>Nama</th>

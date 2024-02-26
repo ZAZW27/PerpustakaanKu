@@ -24,6 +24,7 @@
                 </div>
             </div>
         </div>
+        
         <div id="book-section" class="w-full relative z-[10] flex flex-row flex-wrap gap-1 md:gap-4 justify-center items-center card rounded-box p-2">
             <?php 
                 $getBook = mysqli_query($con, "SELECT b.judul, b.id_buku, b.image, b.penulis, b.penerbit, p.tgl_peminjaman, p.tgl_tegat, p.tgl_pengembalian, p.status_peminjaman

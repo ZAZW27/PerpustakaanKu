@@ -39,14 +39,14 @@ $id_user = $_SESSION['id_user'];
 
 <body class="">
     <script>
-        // $(document).ready(function() {
-        //     $('#datatables').DataTable({
-        //         // dom: 'Bfrtip',
-        //         // buttons: ['copy', 'excel', 'pdf', 'print'],
-        //         lengthMenu: [10, 25, 50, 100], // Add this line to specify the page length options
-        //         paging: true // Make sure paging is enabled
-        //     });
-        // });
+        $(document).ready(function() {
+            $('#datatables').DataTable({
+                dom: 'Bfrtip',
+                buttons: ['copy', 'excel', 'pdf', 'print'],
+                lengthMenu: [10, 25, 50, 100], // Add this line to specify the page length options
+                paging: true // Make sure paging is enabled
+            });
+        });
 
     </script>
     <header class="fixed w-[100vw] z-[99]">
