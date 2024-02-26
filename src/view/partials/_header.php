@@ -13,7 +13,7 @@ $id_user = $_SESSION['id_user'];
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="autumn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +37,7 @@ $id_user = $_SESSION['id_user'];
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.html5.min.js"></script>
 </head>
 
-<body class="bg-slate-50">
+<body class="">
     <script>
         // $(document).ready(function() {
         //     $('#datatables').DataTable({

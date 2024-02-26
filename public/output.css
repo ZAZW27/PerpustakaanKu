@@ -3357,6 +3357,18 @@ html {
   height: 100%;
 }
 
+.h-60 {
+  height: 15rem;
+}
+
+.h-\[\] {
+  height: ;
+}
+
+.h-\[20rem\] {
+  height: 20rem;
+}
+
 .max-h-\[30rem\] {
   max-height: 30rem;
 }
@@ -3379,6 +3391,10 @@ html {
 
 .w-\[100vw\] {
   width: 100vw;
+}
+
+.w-\[3rem\] {
+  width: 3rem;
 }
 
 .w-\[40rem\] {
@@ -3471,8 +3487,16 @@ html {
   gap: 1.25rem;
 }
 
+.gap-8 {
+  gap: 2rem;
+}
+
 .self-start {
   align-self: flex-start;
+}
+
+.self-end {
+  align-self: flex-end;
 }
 
 .self-center {
@@ -3576,13 +3600,23 @@ html {
   background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 
-.bg-slate-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
-}
-
 .bg-transparent {
   background-color: transparent;
+}
+
+.bg-slate-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+
+.bg-slate-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(203 213 225 / var(--tw-bg-opacity));
 }
 
 .bg-gradient-to-t {
@@ -3970,6 +4004,10 @@ html {
 
   .md\:gap-4 {
     gap: 1rem;
+  }
+
+  .md\:self-start {
+    align-self: flex-start;
   }
 
   .md\:border-b-0 {

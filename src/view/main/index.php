@@ -28,13 +28,8 @@
                     
                     $('#banner').css("top",bannerScrolling );
                 }
-                $(window).scroll(function(){
-                    var scrollVal = $(this).scrollTop();
-                    
-                    var bannerScrolling = (scrollVal * 0.4) + "px"
-                    // Apply the new object-position value to the '#banner' element
-                    $('#banner').css("top",bannerScrolling );
-                });
+                parallaxScroll()
+                $(window).scroll(parallaxScroll);
             });
         </script>
     </div>
@@ -81,7 +76,7 @@
                     <div class="w-full relative z-[10] flex flex-row flex-wrap gap-1 md:gap-4 justify-center md:justify-start items-center card rounded-box p-2">
                         <?php 
                             $id_kategori = $cat['id_kategori'];
-                            $getBook = mysqli_query($con, "SELECT tbl_buku.id_buku, image, judul, penulis FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE id_kategori = $id_kategori LIMIT 6");
+                            $getBook = mysqli_query($con, "SELECT tbl_buku.id_buku, image, judul, penulis FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE id_kategori = $id_kategori LIMIT 5");
                             while($book = mysqli_fetch_array($getBook)){
                         ?>
                             <a href="../book/index.php?buku=<?=$book['id_buku']?>" id="buku" idBuku="<?=$book['id_buku']?>" class="w-[9rem] myShadow overflow-hidden md:w-[14rem] h-[17rem] md:h-[20rem] place-items-center card bg-base-300 bg-cover bg-no-repeat bg-center transition-all duration-300 ease-in-out" 
