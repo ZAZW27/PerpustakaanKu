@@ -70,7 +70,7 @@ $id_user = $_SESSION['id_user'];
                             <a class="<?= $level == 'petugas' ? '' : 'hidden' ?>" href="../sortir/index.php" class="btn btn-ghost btn-circle">Sortir</a>
                         </li>
                         <li>
-                            <a class="" href="../user/index.php" class="btn btn-ghost btn-circle">User</a>
+                            <a class="" href="../user/index.php" class="btn btn-ghost btn-circle">Akun</a>
                         </li>
                         <li>
                             <a href="../auth/crud/aksi-logout.php" class="btn btn-ghost btn-circle">
@@ -102,7 +102,7 @@ $id_user = $_SESSION['id_user'];
                 <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../buku-log/index.php" class="btn btn-ghost btn-circle">Buku Log</a>
                 <a class="<?= $level == 'administrator' ? '' : 'hidden' ?>" href="../pengguna/index.php" class="btn btn-ghost btn-circle">Pengguna</a>
                 <a class="<?= $level == 'petugas' ? '' : 'hidden' ?>" href="../sortir/index.php" class="btn btn-ghost btn-circle">Sortir</a>
-                <a class="" href="../user/index.php" class="btn btn-ghost btn-circle">User</a>
+                <a class="" href="../user/index.php" class="btn btn-ghost btn-circle">Akun</a>
                 <a href="../auth/crud/aksi-logout.php" class="btn btn-ghost btn-circle">
                     <div class="indicator">
                         <!-- <svg fill="#3e3737" width="64px" height="64px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" stroke="#3e3737" stroke-width="0.00016"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#fefbfb" stroke-width="1.536"><path d="M1.3 3.75h5.88V2.5H1.3A1.25 1.25 0 0 0 .05 3.75v8.5A1.25 1.25 0 0 0 1.3 13.5h5.88v-1.25H1.3z"></path><path d="m15.4 7-4-2.74-.71 1 3.08 2.1H4.71v1.26h9.07l-3.08 2.11.71 1L15.4 9a1.24 1.24 0 0 0 0-2z"></path></g><g id="SVGRepo_iconCarrier"><path d="M1.3 3.75h5.88V2.5H1.3A1.25 1.25 0 0 0 .05 3.75v8.5A1.25 1.25 0 0 0 1.3 13.5h5.88v-1.25H1.3z"></path><path d="m15.4 7-4-2.74-.71 1 3.08 2.1H4.71v1.26h9.07l-3.08 2.11.71 1L15.4 9a1.24 1.24 0 0 0 0-2z"></path></g></svg> -->

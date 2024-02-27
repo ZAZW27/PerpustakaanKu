@@ -369,7 +369,7 @@
         <div class="row row--top-20 md:px-12 lg:px-24">
             <div class="col-md-12">
                 <div class="table-container">
-                    <table class="table" id="datatables">
+                    <table class="table" id="">
                         <thead class="table__thead">
                             <tr>
                                 <th class="table__th">No</th>

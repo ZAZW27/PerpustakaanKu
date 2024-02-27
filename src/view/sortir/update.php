@@ -1,11 +1,20 @@
 <?php include '../partials/_header.php' ?>
     <?php
     $id_buku = $_GET['buku'];
-    $getBuku = mysqli_query($con, "SELECT tbl_buku.id_buku, judul, penulis, penerbit, tahun_terbit, id_kategori, image
-    FROM tbl_buku INNER JOIN tbl_kategori_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE tbl_buku.id_buku = '$id_buku'");
+    $checkKategori = mysqli_query($con, "SELECT id_kategoribuku  FROM tbl_buku LEFT JOIN tbl_kategori_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE tbl_buku.id_buku = '$id_buku';");
+    
+    if(mysqli_fetch_array($checkKategori)['id_kategoribuku'] == NULL){
+        $getBuku = mysqli_query($con, "SELECT tbl_buku.id_buku, judul, penulis, penerbit, tahun_terbit, image
+        FROM tbl_buku WHERE tbl_buku.id_buku = '$id_buku'");
+    }else{
+        $getBuku = mysqli_query($con, "SELECT tbl_buku.id_buku, judul, penulis, penerbit, tahun_terbit, id_kategori, image
+        FROM tbl_buku INNER JOIN tbl_kategori_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE tbl_buku.id_buku = '$id_buku'");
+    }
+
     $f = mysqli_fetch_array($getBuku);
     ?>
     <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col md:flex-row justify-center items-start">
+        
         <img class="h-[30rem] rounded-md" src="../../../public/images/buku/<?=$f['image']?>" alt="">
         <form action="crud/aksi-update.php" enctype="multipart/form-data" method="post" class=" w-full md:w-[40rem] rounded-md px-4 md:px-12 py-4  flex flex-col justify-center items-center">
             <h1 class="text-2xl font-medium self-start"><span class=" font-light    ">Update buku |</span> <?= $f['judul'] ?></h1>

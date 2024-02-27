@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2024 at 04:06 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Feb 27, 2024 at 12:02 AM
+-- Server version: 10.4.32-MariaDB-log
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,7 +53,15 @@ INSERT INTO `tbl_buku` (`id_buku`, `judul`, `image`, `penulis`, `penerbit`, `tah
 (10, 'Sepakbola: Menyelami Dunia Persepakbolaan Indonesia ', 'sepakbola.jpeg', 'Muhammad Sutan Remy', 'Bentang Pustaka', '2010-01-01'),
 (11, 'Eat, Pray, Love', 'eat pray love.jpeg', 'Elizabeth Gilbert', 'Penguin Books', '2006-02-16'),
 (12, 'The Teaching of Haji Hasan', 'the teaching of al banna.jpeg', 'Haji Hasan Al-Banna', 'Kube Publishing', '2013-08-01'),
-(13, 'Detective Conan', '3976_asdibsajd_jsanjdsanjnd_sadfjbaskjd_2024-03-05.jpeg', 'Gosho Aoyama', 'VIZ Media', '1994-01-01');
+(13, 'Detective Conan', '3976_asdibsajd_jsanjdsanjnd_sadfjbaskjd_2024-03-05.jpeg', 'Gosho Aoyama', 'VIZ Media', '1994-01-01'),
+(14, 'Bahasa Indonesia X', 'bindoX.png', 'Suherli, Maman Suryaman, Aji Septiaji, Istiqomah', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '0000-00-00'),
+(15, 'Bahasa Indonesia XI', 'bindoXI.png', 'Suherli, Maman Suyarman, Aji septiaji, Istiqomah', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '0000-00-00'),
+(16, 'Lewat sini lebih cepat', 'Lewat_Sini_Lebih_Cepat_Cover.png', 'Barbara Eni', 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi', '0000-00-00'),
+(17, 'Kisah airlangga', 'kisahAirlangga.jpg', 'Titi Surti Nastiti', 'Pusat Penelitian Arkeologi Nasional', '0000-00-00'),
+(18, 'Mencari Ibu Kota SRIWIJAYA', 'Mencari Ibu Kota SRIWIJAYA.jpg', 'Mekka Syed Nury M Adnan', 'Balai Arkeologi Sumatera Selatan', '0000-00-00'),
+(19, 'PESISIR UTARA BULELENG DI MASA LALU', 'PESISIR UTARA BULELENG DI MASA LALU.jpg', 'I Wayan Suantika, Nyoman Arisanti, I Gusti Made Suarbhawa', 'Balai Arkeologi Bali', '0000-00-00'),
+(20, 'Piring bahagia SIBI', 'Piring_Bahagia_Sibi_Cover.png', 'Dian Pertiwi Josua', 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi\r\n', '0000-00-00'),
+(21, 'AYO BERSAMA MENGUNGKAP AKAR PERADABAN KARANGASEM', 'AYO BERSAMA MENGUNGKAP AKAR PERADABAN KARANGASEM.jpg', 'I Nyoman Rema, Ida Ayu Gede Megasuari Indria, A.A Sagung Mas Rucitadewi', 'Balai Arkeologi Bali', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -74,14 +82,15 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 (1, 'Fiksi'),
 (2, 'Non-Fiksi'),
 (3, 'Referensi'),
-(4, 'Anaka-anak dan Remaja'),
+(4, 'Anak-anak dan Remaja'),
 (5, 'Pendidikan dan akademis'),
 (6, 'Olahraga dan Rekreasi'),
 (7, 'Kesehatan dan gaya hidup'),
 (8, 'Seni dan Desain'),
 (9, 'Agama'),
 (10, 'Spiritual'),
-(11, 'komik dan grafik novel');
+(11, 'komik dan grafik novel'),
+(12, 'Resepi Masak');
 
 -- --------------------------------------------------------
 
@@ -100,8 +109,6 @@ CREATE TABLE `tbl_kategori_buku` (
 --
 
 INSERT INTO `tbl_kategori_buku` (`id_kategoribuku`, `id_buku`, `id_kategori`) VALUES
-(25, 1, 1),
-(26, 1, 4),
 (27, 2, 1),
 (28, 3, 1),
 (29, 4, 2),
@@ -112,7 +119,10 @@ INSERT INTO `tbl_kategori_buku` (`id_kategoribuku`, `id_buku`, `id_kategori`) VA
 (34, 9, 5),
 (35, 10, 6),
 (36, 11, 7),
-(37, 12, 10);
+(37, 12, 10),
+(46, 1, 1),
+(47, 1, 5),
+(48, 1, 4);
 
 -- --------------------------------------------------------
 
@@ -139,7 +149,8 @@ INSERT INTO `tbl_koleksi_pribadi` (`id_koleksi`, `id_user`, `id_buku`) VALUES
 (16, 2, 13),
 (17, 2, 2),
 (18, 2, 3),
-(20, 1, 1);
+(20, 1, 1),
+(22, 6, 3);
 
 -- --------------------------------------------------------
 
@@ -222,7 +233,8 @@ CREATE TABLE `ulasanbuku` (
 
 INSERT INTO `ulasanbuku` (`id_ulasan`, `id_user`, `id_buku`, `ulasan`, `rating`) VALUES
 (1, 1, 1, 'Buku ini bagus menceritakan tentang pertualangan anak anak muda yang sungguh cerah sekali', 5),
-(2, 1, 1, 'lumayan sih menceritakan tentang sebuah pertualangan yang keren\r\n', 3);
+(2, 1, 1, 'lumayan sih menceritakan tentang sebuah pertualangan yang keren\r\n', 3),
+(3, 6, 3, 'bukunya lumayan edukatif sih tapi sungguh komplex bagi pengguna yang baru membacanya ', 4);
 
 --
 -- Indexes for dumped tables
@@ -284,25 +296,25 @@ ALTER TABLE `ulasanbuku`
 -- AUTO_INCREMENT for table `tbl_buku`
 --
 ALTER TABLE `tbl_buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_kategori_buku`
 --
 ALTER TABLE `tbl_kategori_buku`
-  MODIFY `id_kategoribuku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id_kategoribuku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tbl_koleksi_pribadi`
 --
 ALTER TABLE `tbl_koleksi_pribadi`
-  MODIFY `id_koleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_koleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_peminjaman`
@@ -320,7 +332,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT for table `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
-  MODIFY `id_ulasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_ulasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
