@@ -6,7 +6,7 @@
             <div class="flex flex-col py-2 items-start self-start w-full">
                 <select name="id_user" class="border-b-2 border-neutral w-full bg-transparent" name="" id="">
                     <?php 
-                    $getCat = mysqli_query($con, "SELECT * FROM tbl_user");
+                    $getCat = mysqli_query($con, "SELECT * FROM `tbl_user` WHERE level NOT IN ('administrator', 'petugas');");
                     while($cat = mysqli_fetch_array($getCat)){
                     ?>
                     <option value="<?= $cat['id_user']?>"><?= $cat['username'] ?></option>

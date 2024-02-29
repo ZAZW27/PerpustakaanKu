@@ -24,25 +24,59 @@ if ($_FILES['gambar']["name"] > 0) {
 
     if(move_uploaded_file($_FILES['gambar']['tmp_name'], $destinationPath)){
         $update = mysqli_query($con, "UPDATE tbl_buku SET judul='$judul', penulis='$penulis', penerbit='$penerbit', image='$gambar', tahun_terbit='$tahun_terbit' WHERE id_buku = '$id_buku'");
-        if ($update) {
-            echo "<script>alert('BERHAISL: menambahkan buku');window.history.go(-2);</script>";
+        if (!$update) {
+            echo "<script>alert('GAGAL: update buku');window.history.go(-1);</script>";
+            return;
         }
-        else{
-            echo "<script>alert('GAGAL: menambahkan buku');window.history.go(-1);</script>";
+    
+        $deleteOldCategory = mysqli_query($con, "DELETE FROM tbl_kategori_buku WHERE id_buku = '$id_buku'");
+        if(!$deleteOldCategory){
+            echo "<script>alert('GAGAL: Hapus kategori');window.history.go(-1);</script>";
+            return;
         }
+    
+        $rep = 0;
+        foreach($kategori as $k => $v){
+            $id_kategori = $kategori[$rep];
+            $insertNewCategory = mysqli_query($con, "INSERT INTO tbl_kategori_buku (id_buku, id_kategori) VALUES ('$id_buku', '$id_kategori')");
+    
+            if(!$insertNewCategory){
+                echo "<script>alert('GAGAL: Insert kategori baru');window.history.go(-1);</script>";
+                return;
+            }
+    
+            $rep ++;
+        }
+    
+        echo "<script>alert('BERHASIL: Update kategori baru');window.history.go(-1);</script>";
     }
 }else{
-    echo 'echo 1';
     $update = mysqli_query($con, "UPDATE tbl_buku SET judul='$judul', penulis='$penulis', penerbit='$penerbit', tahun_terbit='$tahun_terbit' WHERE id_buku = '$id_buku'");
-    if ($update) {
-        $cattegorize = mysqli_query($con, "UPDATE tbl_kategori_buku SET id_kategori = '$kategori' WHERE id_buku = '$id_buku'");
-        if($cattegorize){
-            echo "<script>alert('BERHAISL: menambahkan buku');window.history.go(-2);</script>";
+    if (!$update) {
+        echo "<script>alert('GAGAL: update buku');window.history.go(-1);</script>";
+        return;
+    }
+
+    $deleteOldCategory = mysqli_query($con, "DELETE FROM tbl_kategori_buku WHERE id_buku = '$id_buku'");
+    if(!$deleteOldCategory){
+        echo "<script>alert('GAGAL: Hapus kategori');window.history.go(-1);</script>";
+        return;
+    }
+
+    $rep = 0;
+    foreach($kategori as $k => $v){
+        $id_kategori = $kategori[$rep];
+        $insertNewCategory = mysqli_query($con, "INSERT INTO tbl_kategori_buku (id_buku, id_kategori) VALUES ('$id_buku', '$id_kategori')");
+
+        if(!$insertNewCategory){
+            echo "<script>alert('GAGAL: Insert kategori baru');window.history.go(-1);</script>";
+            return;
         }
+
+        $rep ++;
     }
-    else{
-        echo "<script>alert('GAGAL: menambahkan buku');window.history.go(-1);</script>";
-    }
+
+    echo "<script>alert('BERHASIL: Update kategori baru');window.history.go(-1);</script>";
 }
 
 ?>

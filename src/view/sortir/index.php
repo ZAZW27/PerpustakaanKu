@@ -28,7 +28,26 @@
                     </div>
                 </div>
             </div>
+
             <div class="w-full relative z-[10] flex flex-col flex-wrap gap-2 md:gap-4 justify-start items-start card rounded-box p-2">
+                <div class="divider my-0 w-full">No kategori</div>
+                <div class="w-full relative z-[10] flex flex-row flex-wrap gap-1 md:gap-2 justify-center md:justify-start items-center card rounded-box">
+                    <?php 
+                    $noKategori = mysqli_query($con, "SELECT tbl_buku.*  FROM tbl_buku LEFT JOIN tbl_kategori_buku ON tbl_kategori_buku.id_buku = tbl_buku.id_buku WHERE id_kategoribuku IS NULL;");
+                    while($nk = mysqli_fetch_array($noKategori)){
+                    ?>
+                    <a href="update.php?buku=<?=$nk['id_buku']?>" id="buku" idBuku="<?=$nk['id_buku']?>" class="w-[9rem] shadow-lg overflow-hidden md:w-[10rem] h-[13rem] md:h-[20rem] place-items-center card bg-base-300 bg-cover bg-no-repeat bg-center transition-all duration-300 ease-in-out" 
+                    style="background-image: url('../../../public/images/buku/<?=$nk['image'] > 0 ? $nk['image'] : 'notfound.jpeg' ?>');">
+                        <div class="w-full h-full hover:bg-gradient-to-t from-slate-900/80 to-slate-900/0 transition-all duration-300 ease-in-out flex flex-col justify-end items-start px-2 py-2 text-transparent hover:text-white">
+                            <h1 class="text-md"><?= $nk['judul'] ?></h1>
+                            <div class="flex justify-end text-sm font-extralight w-full">
+                                <p>- </p>
+                                <p class=""><?= $nk['penulis'] ?></p>
+                            </div>
+                        </div>
+                    </a>
+                    <?php } ?>
+                </div>
                 <?php 
                 if($isCatgorySet){
                     $idKategori = $_GET['kategori'];
