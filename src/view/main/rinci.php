@@ -43,7 +43,7 @@
                             <label for="" class="text-lg font-normal">Kategori</label>
                             <select name="category-option" id="category-option" class="focus:outline-none focus:border-none focus:ring-0 bg-transparent">
                                 <option value="">all</option>
-                                <?php
+                                <?php 
                                 $getSortCat = mysqli_query($con, "SELECT tbl_kategori_buku.id_kategori, tbl_kategori.nama_kategori FROM tbl_kategori_buku INNER JOIN tbl_buku ON tbl_buku.id_buku = tbl_kategori_buku.id_buku INNER JOIN tbl_kategori ON tbl_kategori.id_kategori = tbl_kategori_buku.id_kategori GROUP BY tbl_kategori.id_kategori;");
                                 while($kat = mysqli_fetch_array($getSortCat)){
                                 ?>
@@ -72,7 +72,7 @@
                 }
                 while($cat = mysqli_fetch_array($getCategory)){
                 ?>
-                    <a href="crud/aksi-rinci.php?id=<?=$cat['id_kategori']?>" class="divider divider-start text-3xl font-thin w-full mb-2 mt-10"><?= $cat['nama_kategori'] ?></a>
+                    <div class="divider divider-start text-3xl font-thin w-full mb-2 mt-10"><?= $cat['nama_kategori'] ?></div>
                     <div class="w-full relative z-[10] flex flex-row flex-wrap gap-1 md:gap-4 justify-center md:justify-start items-center card rounded-box p-2">
                         <?php 
                             $id_kategori = $cat['id_kategori'];

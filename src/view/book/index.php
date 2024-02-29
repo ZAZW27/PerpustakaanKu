@@ -49,7 +49,8 @@
     <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col md:flex-row justify-center items-center md:items-start gap-4">
         <img class="min-h-[30rem] max-h-[30rem] shadow-xl rounded-lg" src="../../../public/images/buku/<?=$f['image'] > 0 ? $f['image'] : 'notfound.jpeg' ?>" alt="">
         <div class="flex flex-col gap-2">
-            <div class="bg-base-200 p-2">
+            <div class="bg-base-200 px-2 flex flex-col flex-wrap items-start justify-start py-4">
+                <a href="#" class="ml-auto bg-blue-600 text-white rounded-md shadow-sm px-2 py-[4px]" onclick="window.history.go(-1)">< Kembali</a>
                 <h1 class="text-xl font-bold"><span class="font-medium">Ditulis oleh:</span> <?= $f['penulis'] ?></h1>
                 <h1 class="text-xl font-bold"><span class="font-medium">Diterbitkan oleh:</span> <?= $f['penerbit'] ?></h1>
                 <h1 class="text-xl font-bold"><span class="font-medium">Diterbitkan pada:</span> <?= $f['tahun_terbit'] ?></h1>
