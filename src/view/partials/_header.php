@@ -13,7 +13,7 @@ $id_user = $_SESSION['id_user'];
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-theme="autumn">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +50,7 @@ $id_user = $_SESSION['id_user'];
 
     </script>
     <header class="fixed w-[100vw] z-[99]">
-        <nav class="navbar bg-base-100 w-full shadow-lg px-1 md:px-12">
+        <nav class="navbar bg-[#005B41] text-white  w-full shadow-lg px-1 md:px-12">
             <div class="navbar-start">
                 <div class="dropdown md:hidden">
                     <div tabindex="0" role="button" class="btn btn-ghost btn-circle">

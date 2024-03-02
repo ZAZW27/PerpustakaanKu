@@ -10,6 +10,9 @@
     font-family: Poppins;
 }   
 
+.test-color{
+    color: #fbfbfb00;
+}
 .myShadow{
     box-shadow: 5px 7px 10px rgba(51, 65, 85, 0.35);
 }
