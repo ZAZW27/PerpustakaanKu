@@ -5,6 +5,21 @@ $id_buku = $_POST['id_buku'];
 $id_user = $_POST['id_user'];
 $is_saved = $_POST['is_saved'];
 
+if($is_saved == 'false'){
+    $collect = mysqli_query($con, "INSERT INTO tbl_koleksi_pribadi (id_user, id_buku) VALUES ('$id_user', '$id_buku')");
+    // echo 'ini false';
+}else{
+    $collect = mysqli_query($con, "DELETE FROM tbl_koleksi_pribadi WHERE id_user = '$id_user' AND id_buku = '$id_buku'");
+    // echo 'real';
+}
+
+if(!$collect){
+    echo "<script>alert('NOOOOOOOOOOOOOOOOOO NGA BISA :(')</script>";
+    return;
+}
+?>
+
+<?php 
 if($is_saved == 'true'){
 
 ?>
