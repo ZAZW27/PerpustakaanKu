@@ -299,23 +299,23 @@
                 $(this).removeClass('scale-125')
             }, 110);
 
-            // $.ajax({
-            //     type: 'POST',
-            //     dataType: 'html', 
-            //     url: 'crud/aksi-koleksi.php',
-            //     data: {
-            //         id_buku: idBuku, 
-            //         id_user: idUser, 
-            //         is_saved: isSaved
-            //     }, 
-            //     success: function(data){
-            //         collection.html(data)
-            //     }, 
-            //     error: function (jqXHR, textStatus, errorThrown) {
-            //         // Handle errors during the AJAX request
-            //         console.error('AJAX Error:', textStatus, errorThrown);
-            //     }
-            // })
+            $.ajax({
+                type: 'POST',
+                dataType: 'html', 
+                url: 'crud/aksi-koleksi.php',
+                data: {
+                    id_buku: idBuku, 
+                    id_user: idUser, 
+                    is_saved: isSaved
+                }, 
+                success: function(data){
+                    collection.html(data)
+                }, 
+                error: function (jqXHR, textStatus, errorThrown) {
+                    // Handle errors during the AJAX request
+                    console.error('AJAX Error:', textStatus, errorThrown);
+                }
+            })
         })
     </script>
     <script src="main.js"></script>
