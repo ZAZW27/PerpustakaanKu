@@ -83,7 +83,7 @@
 
                         while($recent = mysqli_fetch_array($getRecent)){
                         ?>
-                        <div id="books" class="w-[12.3rem] h-[20rem] bg-cover bg-no-repeat bg-center shadow-lg shadow-slate-600/60" style="background-image: url('../../../public/images/buku/<?=$recent['image']?>');">
+                        <div id="book" idBuku="<?=$recent['id_buku']?>" class="w-[12.3rem] h-[20rem] bg-cover bg-no-repeat bg-center shadow-lg shadow-slate-600/60 cursor-pointer" style="background-image: url('../../../public/images/buku/<?=$recent['image']?>');">
                             <div class="flex flex-col w-full h-full justify-end">
                                 <div class="h-full w-full flex flex-row justify-between items-end relative z-[11] pl-2" style="background: linear-gradient(to top, rgba(9, 38, 53, 0.9), rgba(9, 38, 53, 0.7), rgba(9, 38, 53, 0.4), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0));">
                                     <div href="" class="bg-white rounded-sm px-0.5 flex gap-1 items-center">
@@ -111,6 +111,7 @@
                         <!-- AKNHIRAN DARI CONTAINER BUKU -->
                     </div>  
                 </div>
+                
                 <div class="md:col-span-1  md:h-auto pr-6">
                     <h1 class="text-black text-5xl font-thin">Top Books</h1>
                     <div class="flex flex-row md:flex-col overflow-x-auto md:overflow-x-clip mt-3 gap-2">
@@ -126,7 +127,7 @@
 
                         while($top = mysqli_fetch_array($getTop)){
                         ?>
-                        <div class="w-full pr-4">
+                        <a href="" class="w-full pr-4">
                             <div class="w-[20rem] md:w-full bg-cover bg-no-repeat bg-center bg-gray-100 shadow-lg shadow-slate-300/10 flex flex-row justify-start items-center h-24 rounded-lg " style="background-image: url('../../../public/images/buku/<?=$top['image']?>');">
                                 <div class="py-2 px-2  flex bg-slate-950/50 backdrop-blur flex-row justify-start items-center w-full h-full">
                                     <div class="h-full w-16 bg-slate-300 bg-cover bg-no-repeat bg-center rounded-md" style="background-image: url('../../../public/images/buku/<?=$top['image']?>');"></div>
@@ -143,7 +144,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         <?php } ?>
                         <!-- top book contaienr end-->
                     </div>
@@ -151,5 +152,12 @@
             </div>
         </div>
     </main>
+    <script>
+        $(document).off('click', '#book').on('click', '#book', function(){
+            let idBuku = $(this).attr('idBuku')
+            let linkToRinci = 'rinci.php?id=' + idBuku;
+            window.location.href = linkToRinci;
+        });
+    </script>
     <script src="main.js"></script>
 <?php include '../partials/_footer.php' ?>
