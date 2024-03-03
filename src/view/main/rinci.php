@@ -12,7 +12,7 @@
     
     <main class="relative top-16 z-[10] py-4 flex flex-col justify-center items-center">
         <div class="flex flex-col justify-between items-start w-full">
-            <div class="w-full md:px-4">
+            <!-- <div class="w-full md:px-4">
                 <h1 class="text-3xl font-light select-none">Cari Buku</h1>
                 <form action="crud/aksi-rinci.php" method="post" id="category-modal" class="w-full bg-[#008170] px-2 md:py-4 md:px-6  text-white flex md:flex-row flex-col justify-start items-center my-4 md:rounded-t-lg md:rounded-b-sm">
                     <div class="flex gap-6 md:gap-0 md:flex-row w-full md:w-auto my-4 pl-2 md:my-0 flex-col md:border-l-[3px] border-l-[5px] border-[#c8e661] md:px-4 py-1">
@@ -41,7 +41,7 @@
                         <marquee class="w-full font-normal" behavior="scroll" direction="left">Ingin <span class="font-medium">meminjam</span> buku? Kunjungilah perpustakaan Balikpapan dan registrasi melalui administrator kami!</marquee> </h1>
                     </div>
                 </form>
-            </div>
+            </div> -->
             
             <div id="book-section" class="w-full relative z-[10] flex flex-col md:flex-row gap-2 px-2">
                 <form class="md:col-span-1 md:h-auto md:pl-3 md:border-r-[0.4rem] border-[#a1e661] w-full md:w-[40rem]">
@@ -49,7 +49,7 @@
                         <h1 class="text-black text-3xl md:text-4xl font-thin">Search Book</h1>
                         <div class="flex flex-col overflow-x-auto md:overflow-x-clip mt-3 gap-2 pr-4 w-full">
                             <div class="w-full">
-                                <input type="text" class="w-full bg-transparent border-b-2 border-slate-600 focus:ring-0 focus:outline-none" placeholder="🔍search book">
+                                <input id="search-query" type="text" class="w-full bg-transparent border-b-2 border-slate-600 focus:ring-0 focus:outline-none" placeholder="🔍search book">
                             </div>
                             <div class="flex flex-col gap-2 w-full">
                                 <?php 
@@ -68,33 +68,13 @@
                             </div>
                         </div>
                     </div>
-                    <script>
-                        let checkArray = []
-                        $(document).off('click', '#kategori-check').on('click', '#kategori-check', function(){
-                            let newCheck = $(this).val()
-
-                            if(!checkArray.includes(newCheck)){
-                                checkArray.push(newCheck)
-                            }
-                            else{
-                                let checkedIndex = checkArray.indexOf(newCheck)
-                                checkArray.splice(checkedIndex, 1)
-                            }
-                            
-                            $.ajax({
-                                type: 'POST', 
-                                dataType:'html',
-                                url: '',
-                            })
-                        })
-                    </script>
                 </form>
                 <div class="md:col-span-3 md:border-t-0 border-t-[6px] border-[#a1e661] flex flex-col gap-8">
                     <div id="recent-upload" class="mt-4 md:mt-0">
                         <div class="flex justify-between items-cente ">
                             <h1 class="text-black text-3xl md:text-4xl font-thin">Search Result</h1>
                         </div>
-                        <div class="w-full md:px-4 flex justify-center md:justify-center flex-wrap items-center gap-3 py-3 bg-red-500">
+                        <div id="book-container" class="w-full md:px-4 flex justify-center md:justify-center flex-wrap items-center gap-3 py-3">
                             <!-- MULAI DARI CONTAINER BUKU -->
                             <?php 
                             $getRecent = mysqli_query($con, 
@@ -114,13 +94,26 @@
                             ?>
                             <div id="book" idBuku="<?=$book['id_buku']?>" class="w-[10rem] md:w-[10.3rem] h-[18rem] md:h-[18rem] bg-cover bg-no-repeat bg-center shadow-lg shadow-slate-600/60 cursor-pointer hover:scale-105 transition-all duration-200 ease-out" style="background-image: url('../../../public/images/buku/<?=$book['image'] > 0 ? $book['image'] : 'notfound.jpeg' ?>');"> 
                                 <div class="flex flex-col w-full h-full justify-end">
-                                    <div class="h-full w-full flex flex-row justify-between items-end relative z-[11] pl-2" style="background: linear-gradient(to top, rgba(9, 38, 53, 0.9), rgba(9, 38, 53, 0.7), rgba(9, 38, 53, 0.4), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0));">
-                                        <div href="" class="bg-white rounded-sm px-0.5 flex gap-1 items-center">
-                                            <svg width="0.7rem" height="0.7rem" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M9.15316 5.40838C10.4198 3.13613 11.0531 2 12 2C12.9469 2 13.5802 3.13612 14.8468 5.40837L15.1745 5.99623C15.5345 6.64193 15.7144 6.96479 15.9951 7.17781C16.2757 7.39083 16.6251 7.4699 17.3241 7.62805L17.9605 7.77203C20.4201 8.32856 21.65 8.60682 21.9426 9.54773C22.2352 10.4886 21.3968 11.4691 19.7199 13.4299L19.2861 13.9372C18.8096 14.4944 18.5713 14.773 18.4641 15.1177C18.357 15.4624 18.393 15.8341 18.465 16.5776L18.5306 17.2544C18.7841 19.8706 18.9109 21.1787 18.1449 21.7602C17.3788 22.3417 16.2273 21.8115 13.9243 20.7512L13.3285 20.4768C12.6741 20.1755 12.3469 20.0248 12 20.0248C11.6531 20.0248 11.3259 20.1755 10.6715 20.4768L10.0757 20.7512C7.77268 21.8115 6.62118 22.3417 5.85515 21.7602C5.08912 21.1787 5.21588 19.8706 5.4694 17.2544L5.53498 16.5776C5.60703 15.8341 5.64305 15.4624 5.53586 15.1177C5.42868 14.773 5.19043 14.4944 4.71392 13.9372L4.2801 13.4299C2.60325 11.4691 1.76482 10.4886 2.05742 9.54773C2.35002 8.60682 3.57986 8.32856 6.03954 7.77203L6.67589 7.62805C7.37485 7.4699 7.72433 7.39083 8.00494 7.17781C8.28555 6.96479 8.46553 6.64194 8.82547 5.99623L9.15316 5.40838Z" fill="#050500"></path> </g></svg>
-                                            <p class="text-xs"><?= $book['rate'] == NULL ? '0.0' : $book['rate'] ?></p>
+                                    <div class="h-full w-full flex justify-end items-end relative z-[11] px-1" style="background: linear-gradient(to top, rgba(9, 38, 53, 0.9), rgba(9, 38, 53, 0.7), rgba(9, 38, 53, 0.4), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0), rgba(9, 38, 53, 0));">
+                                        <div class="overflow-x-scroll flex items-end gap-1 relative top-4 z-10 w-full justify-start whitespace-nowrap rounded-sm">
+                                            <?php 
+                                            $id_buku = $book['id_buku'];
+                                            $categoryQuery = mysqli_query($con, 
+                                                "SELECT tbl_kategori.id_kategori, tbl_kategori.nama_kategori 
+                                                FROM tbl_kategori_buku INNER JOIN tbl_kategori ON tbl_kategori.id_kategori = tbl_kategori_buku.id_kategori
+                                                WHERE id_buku = '$id_buku'
+                                            ");
+    
+                                            while($fetchCat = mysqli_fetch_array($categoryQuery)){
+                                            ?>
+                                            
+                                            <p id="spec-cat" idBuku="<?=$fetchCat['id_kategori']?>" class="bg-[#53cbff] text-slate-900 relative rounded-sm px-0.5 text-[0.8rem] font-bold flex-shrink-0">
+                                                <?= $fetchCat['nama_kategori'] ?>
+                                            </p>
+                                            <?php } ?>
                                         </div>
                                     </div>
-                                    <div class="w-full h-[6rem] px-2 pb-1 text-white bg-[rgb(9,38,53)]/90 relative z-[9]">
+                                    <div class="w-full h-[6rem] px-2 pb-1 text-white bg-[rgb(9,38,53)]/90 relative z-[11]">
                                         <div class="text-[0.7rem] grid grid-cols-8 h-11 ">
                                             <h1 class="text-sm leading-5 col-span-7 overflow-hidden"><?= (strlen($book['judul']) > 28) ? substr($book['judul'], 0, 28) . '..' : $book['judul'] ?></h1>
                                             <div href="#" id="koleksi" class="col-span-1 relative left-1 md:left-0.5 transition-all duration-200 ease-linear">
@@ -190,6 +183,43 @@
                 }
             })
         })
+    </script>
+    <script>
+        let checkArray = []
+        let searchQuery = '';
+
+        $(document).off('click', '#kategori-check').on('click', '#kategori-check', function(){
+            let newCheck = $(this).val()
+
+            if(!checkArray.includes(newCheck)){
+                checkArray.push(newCheck)
+            }
+            else{
+                let checkedIndex = checkArray.indexOf(newCheck)
+                checkArray.splice(checkedIndex, 1)
+            }
+            searchFun()
+        })
+
+        $('#search-query').on('input', function(){
+            searchQuery = $(this).val()
+            searchFun()
+        })
+
+        function searchFun(){
+            $.ajax({
+                type: 'POST', 
+                dataType:'html',
+                url: 'crud/search-book.php',
+                data: {
+                    checkCat: checkArray, 
+                    searchBook: searchQuery
+                },
+                success: function(data){
+                    $('#book-container').html(data)
+                },
+            })
+        }
     </script>
     <script src="main.js"></script>
 <?php include '../partials/_footer.php' ?>

@@ -36,6 +36,13 @@ $id_user = $_SESSION['id_user'];
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.print.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/buttons/3.0.0/js/buttons.html5.min.js"></script>
 </head>
+<style>
+    /* Hide vertical scroll bar */
+        *::-webkit-scrollbar {
+            width: 0px;
+        }
+
+</style>
 
 <body class="">
     <script>
