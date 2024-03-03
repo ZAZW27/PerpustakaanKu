@@ -56,7 +56,9 @@
                         </div>
                     </div>
                     <div class="justify-self-start">
-                        <button class="bg-[#a1e661] hover:bg-lime-500/80 hover:rounded-md mx-2 transition-all duration-100 ease-in hover:text-white text-black  font-semibold px-3 py-1">Search</button>
+                        <button class="bg-[#a1e661] hover:bg-lime-500/80 hover:rounded-md mx-2 transition-all duration-100 ease-in hover:text-white text-black  font-semibold px-3 py-1">
+                            Search
+                        </button>
                     </div>
                     <div class="ml-auto w-full md:w-[40vw]">
                         <marquee class="w-full font-normal" behavior="scroll" direction="left">Ingin <span class="font-medium">meminjam</span> buku? Kunjungilah perpustakaan Balikpapan dan registrasi melalui administrator kami!</marquee> </h1>
