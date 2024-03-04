@@ -10,9 +10,76 @@
     }
     ?>
     <main class="relative top-16 z-[10] px-0 md:px-3 py-4 flex flex-col justify-center items-center">
-        <div class="mx-auto flex flex-col justify-center items-center">
-            <h1 class="text-3xl text-center font-bold flex justify-center items-center gap-2">Sortir <a href="tambah.php" class="btn btn-success btn-sm text-base-100">Tambah +</a></h1>
+        <div id="modalCat" class="w-full md:w-[30rem] h-full fixed top-16 px-4 py-6 bg-gray-100 shadow-md z-[100] -right-[100%] transition-all duration-500 ease-in-out">
+            <div class="flex w-full justify-between">
+                <button id="closeCat" class="btn btn-success btn-sm text-base-100">close</button>
+                <a class="btn btn-success btn-sm text-base-100" href="insert-cat.php">Tambah+</a>
+            </div>
+            <div class="w-full mt-4 overflow-auto h-[70vh]">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 shadow-md shadow-slate-400/20" id="datatables">
+                    <thead class="text-xs uppercase bg-blue-400 text-white">
+                        <tr class="border-b-[3px] border-slate-950 pt-4">
+                            <th scope="col" class="px-6 py-3">
+                                No
+                            </th>
+                            <th scope="col" class="px-6 py-3">
+                                Nama
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php 
+                        $lol = 1;
+                        $getUser = mysqli_query($con, "SELECT * FROM tbl_kategori");
+                        while($u = mysqli_fetch_array($getUser)){
+                        ?>
+                            <tr class="bg-slate-50 border-b hover:bg-slate-100">
+                                <td class="px-6 py-4 font-medium">
+                                    <p><?= $lol ?></p>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <?= $u['nama_kategori'] ?>
+                                </td>
+                                <td scope="col" class="px-6 py-4 text-center">
+                                    <a class="font-bold" href="update-cat.php?cat=<?=$u['id_kategori']?>">Edit</a>
+                                </td>
+                            </tr>
+                        <?php $lol++; } ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
+        <div class="mx-auto flex flex-row justify-around items-center w-full">
+            <h1 class="text-3xl text-center font-bold flex justify-center items-center gap-2">Sortir <a href="tambah.php" class="btn btn-success btn-sm text-base-100">Tambah +</a></h1>
+            <button id="toggleCat" class="btn btn-success btn-sm text-base-100">Category</button>
+        </div>
+        <script>
+            var catModal = false;
+
+            $('#toggleCat').on('click', function(){
+                catModal = !catModal
+                console.log(catModal)
+
+                toggleModal()
+            })
+            $('#closeCat').on('click', function(){
+                catModal = !catModal
+                console.log(catModal)
+
+                toggleModal()
+            })
+            function toggleModal(){
+                if(catModal == true){
+                    $('#modalCat').removeClass('-right-[100%]').addClass('right-0')
+                }
+                else{
+                    $('#modalCat').addClass('-right-[100%]').removeClass('right-0')
+                }
+            }
+        </script>
         <div class="flex justify-between items-start w-full px-0 md:px-6">
             <div id="category-modal" class="grid w-full md:w-[40rem] h-20 px-4 fixed -top-[100vh] z-[11] flex-grow transition-all duration-300 ease-in-out">
                 <div class="card place-items-center bg-base-200 shadow-md rounded-box w-full h-full flex flex-col justify-start items-start px-4 pt-2 pb-4">

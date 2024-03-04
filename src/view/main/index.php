@@ -37,7 +37,7 @@
         <div class="flex flex-col justify-between items-start w-full">
             <div class="w-full md:px-4">
                 <h1 class="text-3xl font-light select-none">Cari Buku</h1>
-                <form action="crud/aksi-rinci.php" method="post" id="category-modal" class="w-full bg-[#008170] px-2 md:py-4 md:px-6  text-white flex md:flex-row flex-col justify-start items-center my-4 md:rounded-t-lg md:rounded-b-sm">
+                <form action="rinci.php" method="post" id="category-modal" class="w-full bg-[#008170] px-2 md:py-4 md:px-6  text-white flex md:flex-row flex-col justify-start items-center my-4 md:rounded-t-lg md:rounded-b-sm">
                     <div class="flex gap-6 md:gap-0 md:flex-row w-full md:w-auto my-4 pl-2 md:my-0 flex-col md:border-l-[3px] border-l-[5px] border-[#c8e661] md:px-4 py-1">
                         <div class="md:border-r-2 border-b-2 md:border-b-0 border-slate-500/50 pr-1 flex  items-center">
                             <input placeholder="Cari nama buku" id="search-bar" type="text" name="search-buku" class="focus:ring-0 placeholder:text-slate-300 focus:border-none focus:outline-none bg-transparent w-full">
@@ -71,7 +71,6 @@
                     <div id="recent-upload" class="mt-4 md:mt-0">
                         <div class="flex justify-between items-center">
                             <h1 class="text-black text-3xl md:text-5xl font-thin">Recent Uploads</h1>
-                            <a href="" class="bg-[#a1e661] hover:rounded-l-lg transition-all font duration-200 ease-in hover:text-white text-black font-light hover:font-medium pl-4 pr-4 -mr-1 hover:pl-10 hover:py-1 py-0.5 text-sm hover:text-base  text-center">More</a>
                         </div>
                         <div class="w-full md:px-4 flex justify-center md:justify-start flex-wrap items-center gap-3 py-3">
                             <!-- MULAI DARI CONTAINER BUKU -->
@@ -125,7 +124,6 @@
                     <div id="new-released">
                         <div class="flex justify-between items-center">
                             <h1 class="text-black text-3xl md:text-5xl font-thin">New releases</h1>
-                            <a href="" class="bg-[#a1e661] hover:rounded-l-lg transition-all font duration-200 ease-in hover:text-white text-black font-light hover:font-medium pl-4 pr-4 -mr-1 hover:pl-10 hover:py-1 py-0.5 text-sm hover:text-base  text-center">More</a>
                         </div>
                         <div class="w-full md:px-4 flex justify-center md:justify-start flex-wrap items-center gap-3 py-3">
                             <!-- MULAI DARI CONTAINER BUKU -->
@@ -180,7 +178,6 @@
                     <div id="Collection">
                         <div class="flex justify-between items-center">
                             <h1 class="text-black text-3xl md:text-5xl font-thin">Your Collections</h1>
-                            <a href="" class="bg-[#a1e661] hover:rounded-l-lg transition-all font duration-200 ease-in hover:text-white text-black font-light hover:font-medium pl-4 pr-4 -mr-1 hover:pl-10 hover:py-1 py-0.5 text-sm hover:text-base  text-center">More</a>
                         </div>
                         <div class="w-full md:px-4 flex justify-center md:justify-start flex-wrap items-center gap-3 py-3">
                             <!-- MULAI DARI CONTAINER BUKU -->
