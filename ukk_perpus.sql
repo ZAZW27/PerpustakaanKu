@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2024 at 12:02 AM
--- Server version: 10.4.32-MariaDB-log
+-- Generation Time: Mar 05, 2024 at 02:19 AM
+-- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -54,14 +54,15 @@ INSERT INTO `tbl_buku` (`id_buku`, `judul`, `image`, `penulis`, `penerbit`, `tah
 (11, 'Eat, Pray, Love', 'eat pray love.jpeg', 'Elizabeth Gilbert', 'Penguin Books', '2006-02-16'),
 (12, 'The Teaching of Haji Hasan', 'the teaching of al banna.jpeg', 'Haji Hasan Al-Banna', 'Kube Publishing', '2013-08-01'),
 (13, 'Detective Conan', '3976_asdibsajd_jsanjdsanjnd_sadfjbaskjd_2024-03-05.jpeg', 'Gosho Aoyama', 'VIZ Media', '1994-01-01'),
-(14, 'Bahasa Indonesia X', 'bindoX.png', 'Suherli, Maman Suryaman, Aji Septiaji, Istiqomah', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '0000-00-00'),
-(15, 'Bahasa Indonesia XI', 'bindoXI.png', 'Suherli, Maman Suyarman, Aji septiaji, Istiqomah', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '0000-00-00'),
-(16, 'Lewat sini lebih cepat', 'Lewat_Sini_Lebih_Cepat_Cover.png', 'Barbara Eni', 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi', '0000-00-00'),
-(17, 'Kisah airlangga', 'kisahAirlangga.jpg', 'Titi Surti Nastiti', 'Pusat Penelitian Arkeologi Nasional', '0000-00-00'),
-(18, 'Mencari Ibu Kota SRIWIJAYA', 'Mencari Ibu Kota SRIWIJAYA.jpg', 'Mekka Syed Nury M Adnan', 'Balai Arkeologi Sumatera Selatan', '0000-00-00'),
-(19, 'PESISIR UTARA BULELENG DI MASA LALU', 'PESISIR UTARA BULELENG DI MASA LALU.jpg', 'I Wayan Suantika, Nyoman Arisanti, I Gusti Made Suarbhawa', 'Balai Arkeologi Bali', '0000-00-00'),
-(20, 'Piring bahagia SIBI', 'Piring_Bahagia_Sibi_Cover.png', 'Dian Pertiwi Josua', 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi\r\n', '0000-00-00'),
-(21, 'AYO BERSAMA MENGUNGKAP AKAR PERADABAN KARANGASEM', 'AYO BERSAMA MENGUNGKAP AKAR PERADABAN KARANGASEM.jpg', 'I Nyoman Rema, Ida Ayu Gede Megasuari Indria, A.A Sagung Mas Rucitadewi', 'Balai Arkeologi Bali', '0000-00-00');
+(14, 'Bahasa Indonesia X', 'bindoX.png', 'Suherli, Maman Suryaman, Aji Septiaji, Istiqomah', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '2024-03-11'),
+(15, 'Bahasa Indonesia XI', 'bindoXI.png', 'Suherli, Maman Suyarman, Aji septiaji, Istiqomah', 'Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud', '2024-03-11'),
+(16, 'Lewat sini lebih cepat', 'Lewat_Sini_Lebih_Cepat_Cover.png', 'Barbara Eni', 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi', '2024-03-11'),
+(17, 'Kisah airlangga', 'kisahAirlangga.jpg', 'Titi Surti Nastiti', 'Pusat Penelitian Arkeologi Nasional', '2024-03-11'),
+(18, 'Mencari Ibu Kota SRIWIJAYA', 'Mencari Ibu Kota SRIWIJAYA.jpg', 'Mekka Syed Nury M Adnan', 'Balai Arkeologi Sumatera Selatan', '2024-03-11'),
+(19, 'PESISIR UTARA BULELENG DI MASA LALU', 'PESISIR UTARA BULELENG DI MASA LALU.jpg', 'I Wayan Suantika, Nyoman Arisanti, I Gusti Made Suarbhawa', 'Balai Arkeologi Bali', '2024-03-11'),
+(20, 'Piring bahagia SIBI', 'Piring_Bahagia_Sibi_Cover.png', 'Dian Pertiwi Josua', 'Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi\r\n', '2024-03-11'),
+(21, 'AYO BERSAMA MENGUNGKAP AKAR PERADABAN KARANGASEM', 'AYO BERSAMA MENGUNGKAP AKAR PERADABAN KARANGASEM.jpg', 'I Nyoman Rema, Ida Ayu Gede Megasuari Indria, A.A Sagung Mas Rucitadewi', 'Balai Arkeologi Bali', '2024-03-11'),
+(22, 'Bumi ', '5816_Bumi_Tere Liye_Gramedia Pustaka_2014-01-01.jpg', 'Tere Liye 00', 'Gramedia Pustaka', '2014-01-01');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,10 @@ INSERT INTO `tbl_kategori` (`id_kategori`, `nama_kategori`) VALUES
 (9, 'Agama'),
 (10, 'Spiritual'),
 (11, 'komik dan grafik novel'),
-(12, 'Resepi Masak');
+(12, 'Resepi Masak'),
+(14, 'Cinta'),
+(15, 'Shonen'),
+(16, 'Seinen');
 
 -- --------------------------------------------------------
 
@@ -122,7 +126,21 @@ INSERT INTO `tbl_kategori_buku` (`id_kategoribuku`, `id_buku`, `id_kategori`) VA
 (37, 12, 10),
 (46, 1, 1),
 (47, 1, 5),
-(48, 1, 4);
+(48, 1, 4),
+(49, 21, 1),
+(50, 21, 10),
+(51, 16, 4),
+(52, 16, 7),
+(53, 16, 2),
+(54, 16, 3),
+(55, 13, 4),
+(56, 13, 3),
+(57, 13, 1),
+(58, 13, 5),
+(59, 18, 2),
+(60, 18, 5),
+(61, 18, 3),
+(75, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -141,16 +159,17 @@ CREATE TABLE `tbl_koleksi_pribadi` (
 --
 
 INSERT INTO `tbl_koleksi_pribadi` (`id_koleksi`, `id_user`, `id_buku`) VALUES
-(4, 2, 11),
-(5, 2, 12),
 (6, 2, 8),
 (13, 3, 1),
 (15, 3, 2),
-(16, 2, 13),
-(17, 2, 2),
-(18, 2, 3),
-(20, 1, 1),
-(22, 6, 3);
+(22, 6, 3),
+(54, 2, 12),
+(55, 2, 3),
+(58, 2, 3),
+(63, 1, 18),
+(64, 1, 12),
+(68, 1, 3),
+(69, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -184,7 +203,8 @@ INSERT INTO `tbl_peminjaman` (`id_peminjaman`, `id_user`, `id_buku`, `tgl_peminj
 (9, 3, 1, '2024-02-22', '2024-03-05', '2024-02-22', 'retrieved'),
 (10, 3, 6, '2024-02-23', '2024-03-06', '2024-02-23', 'retrieved'),
 (11, 6, 7, '2024-02-23', '2024-03-06', NULL, 'on going'),
-(12, 2, 10, '2024-02-23', '2024-02-21', '2024-02-23', 'late retrieved');
+(12, 2, 10, '2024-02-23', '2024-02-21', '2024-02-23', 'late retrieved'),
+(13, 5, 13, '2024-02-28', '2024-03-11', NULL, 'on going');
 
 -- --------------------------------------------------------
 
@@ -210,8 +230,9 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `email`, `nama_lengka
 (1, 'zharif', 'c4ca4238a0b923820dcc509a6f75849b', 'zharifazizzulkarnain@gmail.com', 'Zharif Aziz Zulkarnain Widodo', 'Perum. Graha Indah Block W No. 22', 'administrator'),
 (2, 'yusoup', 'c4ca4238a0b923820dcc509a6f75849b', 'youshouldrun@gmail.com', 'Muhammad Yusuf Pratama', 'kariangau', 'petugas'),
 (3, 'radeet', 'c4ca4238a0b923820dcc509a6f75849b', 'mradytikhsan@gmail.com', 'Muhammad Radyt Ikhsan Pratama', 'perumahan wiwiw', 'petugas'),
-(5, 'asdasdas', '', '', '', '', 'peminjam'),
-(6, 'maul', 'c4ca4238a0b923820dcc509a6f75849b', 'arya@gmail.com', 'maulana', 'semabrang', 'peminjam');
+(5, 'hadriwawan', '4b349b478a71e1721e440224e0a46e4f', 'hadriwawawa@gmail.com', 'Hadriawan Pratama', 'Di rumah hadri', 'peminjam'),
+(6, 'maul', 'c4ca4238a0b923820dcc509a6f75849b', 'arya@gmail.com', 'maulana', 'semabrang', 'peminjam'),
+(7, 'radyt', 'cfcd208495d565ef66e7dff9f98764da', 'radytwow@gmail.com', 'radyt', 'di deket sekolah', 'peminjam');
 
 -- --------------------------------------------------------
 
@@ -234,7 +255,9 @@ CREATE TABLE `ulasanbuku` (
 INSERT INTO `ulasanbuku` (`id_ulasan`, `id_user`, `id_buku`, `ulasan`, `rating`) VALUES
 (1, 1, 1, 'Buku ini bagus menceritakan tentang pertualangan anak anak muda yang sungguh cerah sekali', 5),
 (2, 1, 1, 'lumayan sih menceritakan tentang sebuah pertualangan yang keren\r\n', 3),
-(3, 6, 3, 'bukunya lumayan edukatif sih tapi sungguh komplex bagi pengguna yang baru membacanya ', 4);
+(3, 6, 3, 'bukunya lumayan edukatif sih tapi sungguh komplex bagi pengguna yang baru membacanya ', 4),
+(4, 1, 12, 'waw waw waw, keren!', 5),
+(5, 1, 3, 'wow', 5);
 
 --
 -- Indexes for dumped tables
@@ -296,43 +319,43 @@ ALTER TABLE `ulasanbuku`
 -- AUTO_INCREMENT for table `tbl_buku`
 --
 ALTER TABLE `tbl_buku`
-  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_buku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbl_kategori_buku`
 --
 ALTER TABLE `tbl_kategori_buku`
-  MODIFY `id_kategoribuku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_kategoribuku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
 
 --
 -- AUTO_INCREMENT for table `tbl_koleksi_pribadi`
 --
 ALTER TABLE `tbl_koleksi_pribadi`
-  MODIFY `id_koleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_koleksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `tbl_peminjaman`
 --
 ALTER TABLE `tbl_peminjaman`
-  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_peminjaman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `ulasanbuku`
 --
 ALTER TABLE `ulasanbuku`
-  MODIFY `id_ulasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ulasan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
